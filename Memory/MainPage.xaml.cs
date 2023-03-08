@@ -9,16 +9,14 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+    private void SinglePlayer(object sender, EventArgs e)
+    {
+        App.Current.MainPage = new SinglePlayer();
+    }
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+    private void MultiPlayer_Clicked(object sender, EventArgs e)
+    {
+        App.Current.MainPage = new SinglePlayer();
+    }
 }
 

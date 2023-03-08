@@ -4,8 +4,6 @@
              x:Class="Memory.MainPage">
 
     <ScrollView>
-        <!--Prova-->
-        <!--Prova-->
         <VerticalStackLayout  
             Spacing="25"
             Padding="35"
@@ -31,10 +29,14 @@
                 HorizontalOptions="Center" />
 
             <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
+                x:Name="singlePlayer"
+                Text="Single Player"
+                Clicked="SinglePlayer"
+                HorizontalOptions="Center" />
+            <Button
+                x:Name="MultiPlayer"
+                Text="MultiPlayer"
+                Clicked="MultiPlayer_Clicked"
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>
