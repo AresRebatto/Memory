@@ -16,7 +16,7 @@ public partial class MainPage : ContentPage
 
     private void MultiPlayer_Clicked(object sender, EventArgs e)
     {
-        App.Current.MainPage = new SinglePlayer();
+        App.Current.MainPage = new MuliPlayer();
     }
 }
 
