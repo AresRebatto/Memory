@@ -14,10 +14,11 @@
 
         <Button
             ImageSource="leftarrow.png"
-            WidthRequest="10"
+            WidthRequest="30"
             BackgroundColor="Transparent"
             HorizontalOptions="Start"
-            Clicked="Button_Clicked"/>
+            Clicked="Button_Clicked"
+            Margin="10, 10, 0, 0"/>
         
     </VerticalStackLayout>
 </ContentPage>
