@@ -1,44 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Memory.MainPage">
-
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="LightContent" />
+    </ContentPage.Behaviors>
     <ScrollView>
-        <VerticalStackLayout  
+
+            <VerticalStackLayout  
             Spacing="25"
             Padding="35"
             VerticalOptions="Center">
-                
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
             <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
+                Text="FLAGICON"
                 FontSize="32"
-                HorizontalOptions="Center" />
-
+                HorizontalOptions="Center"
+                Padding="30"
+                FontAttributes="Bold"
+                />
             <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
+                    Text="SCEGLI LA MODALITÀ DI GIOCO"
+                    FontSize="22"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    
+                    FontAttributes="Bold"/>
             <Button
-                x:Name="singlePlayer"
-                Text="Single Player"
-                Clicked="SinglePlayer"
-                HorizontalOptions="Center" />
+                    x:Name="singlePlayer"
+                    Text="SINGLE PLAYER"
+                    Clicked="SinglePlayer"
+                    HorizontalOptions="Center" />
             <Button
-                x:Name="MultiPlayer"
-                Text="MultiPlayer"
-                Clicked="MultiPlayer_Clicked"
-                HorizontalOptions="Center" />
-
+                    x:Name="MultiPlayer"
+                    Text="MULTI PLAYER"
+                    Clicked="MultiPlayer_Clicked"
+                    HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>
 
