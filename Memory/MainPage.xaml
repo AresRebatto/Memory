@@ -2,40 +2,50 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="Memory.MainPage">
+             x:Class="Memory.MainPage"
+             BackgroundColor="#440080">
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="LightContent" />
     </ContentPage.Behaviors>
     <ScrollView>
 
             <VerticalStackLayout  
-            Spacing="25"
-            Padding="35"
-            VerticalOptions="Center">
-            <Label
-                Text="FLAGICON"
-                FontSize="32"
-                HorizontalOptions="Center"
-                Padding="30"
-                FontAttributes="Bold"
-                />
-            <Label
-                    Text="SCEGLI LA MODALITÀ DI GIOCO"
-                    FontSize="22"
+                Spacing="25"
+                Padding="35">
+                <Label
+                    Text="Flagicon"
+                    FontSize="32"
                     HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    
-                    FontAttributes="Bold"/>
+                    VerticalOptions="Start"
+                    Padding="30"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    FontFamily="LexendBold"
+                    Margin="0, 0, 0, 150"
+                    />
+                <Label
+                        Text="SCEGLI LA MODALITÀ DI GIOCO"
+                        FontSize="22"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        TextColor="White"
+                        FontFamily="LexendBold"/>
+                <Button
+                        x:Name="singlePlayer"
+                        Text="SINGLE PLAYER"
+                        Clicked="SinglePlayer"
+                        HorizontalOptions="Center"
+                        BackgroundColor="#EEEEEE"
+                        TextColor="#440080"
+                        FontFamily="ComfortaaBold"/>
             <Button
-                    x:Name="singlePlayer"
-                    Text="SINGLE PLAYER"
-                    Clicked="SinglePlayer"
-                    HorizontalOptions="Center" />
-            <Button
-                    x:Name="MultiPlayer"
-                    Text="MULTI PLAYER"
-                    Clicked="MultiPlayer_Clicked"
-                    HorizontalOptions="Center" />
+                        x:Name="MultiPlayer"
+                        Text="MULTI PLAYER"
+                        Clicked="MultiPlayer_Clicked"
+                        HorizontalOptions="Center"
+                        BackgroundColor="#EEEEEE"
+                        TextColor="#440080"
+                        FontFamily="ComfortaaBold"/>
         </VerticalStackLayout>
     </ScrollView>
 

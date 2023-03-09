@@ -13,9 +13,9 @@ public static class MauiProgram
 			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+                fonts.AddFont("Comfortaa-Bold.ttf", "ComfortaaBold");
+                fonts.AddFont("Lexend-Bold.ttf", "LexendBold");
+            });
 		//ciao ares
 		return builder.Build();
 	}
