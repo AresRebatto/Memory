@@ -9,18 +9,15 @@
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="LightContent" />
     </ContentPage.Behaviors>
-    
+
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
 
         <Button
-            Text="Pagina principale"
-            WidthRequest="40"
+            ImageSource="leftarrow.png"
+            WidthRequest="10"
             BackgroundColor="Transparent"
             HorizontalOptions="Start"
             Clicked="Button_Clicked"/>
+        
     </VerticalStackLayout>
 </ContentPage>
