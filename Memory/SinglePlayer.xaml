@@ -4,9 +4,17 @@
              x:Class="Memory.SinglePlayer"
              Title="SinglePlayer">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Picker HorizontalOptions="Center" Margin="0,40,0,0" x:Name="SceltaModalita" BackgroundColor="White">
+            <Picker.ItemsSource TextColor="#440080">
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Facile</x:String>
+                    <x:String>Medio</x:String>
+                    <x:String>Difficile</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+            <Picker.TextColor>
+                <Color>#440080</Color>
+            </Picker.TextColor>
+        </Picker>
     </VerticalStackLayout>
 </ContentPage>
