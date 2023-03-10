@@ -10,13 +10,4 @@
         Title=""
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
-    <ShellContent
-        Title="Single Player"
-        ContentTemplate="{DataTemplate local:SinglePlayer}"
-        Route="SinglePlayer"/>
-    <ShellContent
-        Title="Multi Player"
-        ContentTemplate="{DataTemplate local:MuliPlayer}"
-        Route="MultiPlayer"/>
-
 </Shell>

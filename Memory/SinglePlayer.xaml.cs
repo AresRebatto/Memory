@@ -7,4 +7,9 @@ public partial class SinglePlayer : ContentPage
 		InitializeComponent();
 		SceltaModalita.SelectedItem = "Facile";
 	}
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        App.Current.MainPage = new MainPage();
+    }
 }
