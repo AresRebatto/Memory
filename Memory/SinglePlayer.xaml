@@ -4,34 +4,103 @@
              x:Class="Memory.SinglePlayer"
              Title="SinglePlayer"
              BackgroundColor="#440080">
+    <!--Sile bottoni, in questo modo avranno tutti la stessa formattazione senza che debba andare a specificare le caratteristiche di ognuno in ognuno di essi--> 
+    <ContentPage.Resources>
+        <Style TargetType="Button" x:Key="ButtonFormattation">
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="HeightRequest" Value="60"/>
+            <Setter Property="WidthRequest" Value="60"/>
+            <Setter Property="CornerRadius" Value="30"/>
+            <Setter Property="BackgroundColor" Value="Orange"/>
+            <Setter Property="ImageSource" Value="leftarrow.png"/>
+        </Style>
+    </ContentPage.Resources>
     <VerticalStackLayout>
+        <!--Grid che contiene la leftArrow e il picker-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Button
+                Grid.Row="0"
+                ImageSource="leftarrow.png"
+                WidthRequest="30"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Start"
+                Clicked="Button_Clicked"
+                Margin="15, 15, 0, 0"/>
 
-        <Button
-            ImageSource="leftarrow.png"
-            WidthRequest="30"
-            BackgroundColor="Transparent"
-            HorizontalOptions="Start"
-            Clicked="Button_Clicked"
-            Margin="15, 15, 0, 0"/>
-
-        <Picker 
-            HorizontalOptions="Center" 
-            Margin="0,40,0,0" 
-            x:Name="SceltaModalita" 
-            BackgroundColor="#EEEEEE" 
-            WidthRequest="200" 
-            HeightRequest="34"
-            HorizontalTextAlignment="Center" >
-            <Picker.ItemsSource TextColor="#440080">
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Facile</x:String>
-                    <x:String>Medio</x:String>
-                    <x:String>Difficile</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-            <Picker.TextColor>
-                <Color>#440080</Color>
-            </Picker.TextColor>
-        </Picker>
+            <Picker 
+                Grid.Row="1"
+                HorizontalOptions="Center" 
+                Margin="0,40,0,0" 
+                x:Name="SceltaModalita" 
+                BackgroundColor="#EEEEEE" 
+                WidthRequest="200" 
+                HeightRequest="34"
+                HorizontalTextAlignment="Center" >
+                <Picker.ItemsSource TextColor="#440080">
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Facile</x:String>
+                        <x:String>Medio</x:String>
+                        <x:String>Difficile</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+                <Picker.TextColor>
+                    <Color>#440080</Color>
+                </Picker.TextColor>
+            </Picker>
+        </Grid>
+        <!--Gird che contiene i buttons-->
+        <!-- !!!!! Non posiziona al centro la grid da l punto di vista verticale -->
+        <Grid HorizontalOptions="Center" Margin="80" >
+            <!--Definzione righe-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <!--Definizione colonne-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <!--Easy-->
+            <Button
+                Style="{StaticResource ButtonFormattation}"
+                Grid.Row="0"
+                Grid.Column="0"
+                />
+            <Button
+                Style="{StaticResource ButtonFormattation}"
+                Grid.Row="0"
+                Grid.Column="1"
+                />
+            <Button
+                Style="{StaticResource ButtonFormattation}"
+                Grid.Row="0"
+                Grid.Column="2"
+                />
+            <Button
+                Style="{StaticResource ButtonFormattation}"
+                Grid.Row="1"
+                Grid.Column="0"
+                />
+            <Button
+                Style="{StaticResource ButtonFormattation}"
+                Grid.Row="1"
+                Grid.Column="1"
+                />
+            <Button
+                Style="{StaticResource ButtonFormattation}"
+                Grid.Row="1"
+                Grid.Column="2"
+                />
+            <!--Medium-->
+            
+            <!--Hard-->
+            
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
