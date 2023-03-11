@@ -52,9 +52,9 @@
                 </Picker.TextColor>
             </Picker>
         </Grid>
-        <!--Gird che contiene i buttons-->
-        <!-- !!!!! Non posiziona al centro la grid da l punto di vista verticale -->
-        <Grid HorizontalOptions="Center" Margin="80" >
+        <!--Gird che contiene i buttons => utilizzo flexLayout per posizionare la grid al centro-->
+        <FlexLayout Direction="Column" AlignItems="Center" JustifyContent="Center">
+            <Grid HorizontalOptions="Center" Margin="80" >
             <!--Definzione righe-->
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -101,6 +101,7 @@
             
             <!--Hard-->
             
-        </Grid>
+            </Grid>
+        </FlexLayout>
     </VerticalStackLayout>
 </ContentPage>
