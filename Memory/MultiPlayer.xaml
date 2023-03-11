@@ -19,6 +19,24 @@
             HorizontalOptions="Start"
             Clicked="Button_Clicked"
             Margin="15, 15, 0, 0"/>
-        
+        <Picker 
+            HorizontalOptions="Center" 
+            Margin="0,40,0,0" 
+            x:Name="SceltaModalita" 
+            BackgroundColor="#EEEEEE" 
+            WidthRequest="200" 
+            HeightRequest="34"
+            HorizontalTextAlignment="Center" >
+            <Picker.ItemsSource TextColor="#440080">
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Facile</x:String>
+                    <x:String>Medio</x:String>
+                    <x:String>Difficile</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+            <Picker.TextColor>
+                <Color>#440080</Color>
+            </Picker.TextColor>
+        </Picker>
     </VerticalStackLayout>
 </ContentPage>
