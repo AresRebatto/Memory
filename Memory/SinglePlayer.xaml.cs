@@ -2,7 +2,6 @@ namespace Memory;
 
 public partial class SinglePlayer : ContentPage
 {
-    private ImageButton[,] ButtonMatrix; //=> matrice che contiene i miei bottoni (passati con il nome)
     //Dichiarazioni variabili che serviranno per il controllo . . .
     private int[] vett = new int[3];
     private int[] indexFlags = new int[6];
@@ -15,11 +14,6 @@ public partial class SinglePlayer : ContentPage
 	{
 		InitializeComponent();
         countFinale = indexFlags.Length / 2;
-        ButtonMatrix = new ImageButton[2, 3]
-        {
-            {button00, button01, button02 },
-            {button10, button11, button12 }
-        };
         Random rnd = new Random();
         //Randomizzazione bandiere nelle posizioni del vettore
         for (int i = 0; i < vett.Length; i++)
