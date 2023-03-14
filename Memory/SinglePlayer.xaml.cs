@@ -9,7 +9,9 @@ public partial class SinglePlayer : ContentPage
     private int[,] matrixCheck = new int[2, 3];
     private int[] valueRndRows = new int[6];
     private int[] valueRndColumns = new int[6];
-    private int  countInziale = 0, countFinale, countTimes = 0, count = 0, indexVett = 0, countForFlags = 0;
+    private int countInziale = 0, countFinale, countTimes = 0, count = 0, indexVett = 0, countForFlags = 0, countForArraysStrings = 0;
+    private ImageButton buttonBefore;
+    private int appoggio;
     public SinglePlayer()
 	{
 		InitializeComponent();
@@ -57,6 +59,18 @@ public partial class SinglePlayer : ContentPage
             countInziale = (indexFlags.Length / 2);
             countFinale = indexFlags.Length;
         }
+        /*
+         * Questa matrice conterrà le bandiere e le loro posizioni corrisponderanno alle posizioni dei buttons 
+         */
+        for(int i = 0; i < matrix.GetLength(0); i++)
+        {
+            for(int j = 0; j < matrix.GetLength(1); j++) 
+            {
+                matrix[i, j] = vett[indexFlags[countForFlags]];
+                countForFlags++;
+            }
+        }
+        countForFlags = 0;//Ripristinarlo
 		SceltaModalita.SelectedItem = "Facile";
         SceltaModalita.SelectedIndexChanged += (sender, args) =>
         {
@@ -84,29 +98,33 @@ public partial class SinglePlayer : ContentPage
     {
         //Button premuto
         var button = (ImageButton)sender;
+        //Prendo la riga e la colonna dei buttons per poi assegnarli la giusta bandiera che si trova all'interno della matrice già riempita (matrix)
         int row = Grid.GetRow(button);
         int column = Grid.GetColumn(button);
-        string[] numero = new string[2]; 
-        //Ottengo la riga e la colonna
-        if (button.IsEnabled == true)
+        if(button.IsEnabled == true)
         {
-            if(countForFlags < 2) //Cosi se ritorno la singleplayer dopo aver giocato, l'applicazione non crasha 
+            button.Source = ImageSource.FromFile("b" + Convert.ToString(matrix[row, column])+".png");
+            if(countForFlags == 0) //Per disabilitare il primo button
+                button.IsEnabled = false;
+            if(countForFlags > 0 && countForFlags % 2 != 0)
             {
-                button.Source = ImageSource.FromFile("b" + Convert.ToString(vett[indexFlags[countForFlags]]) + ".png");
-                numero[countForFlags] = "b" + Convert.ToString(vett[indexFlags[countForFlags]]) + ".png";
-                if (numero[countForFlags] == numero[1])
+                if (matrix[row, column] == appoggio) //Se la bandiera del button di ora è uguale a quella del button di prima => li disabiliti
                 {
                     button.IsEnabled = false;
+                    buttonBefore.IsEnabled = false;
                 }
-                else
+                else //Se la bandiera di ora è diversa da quella di prima => entrambi i button allora ritorneranno anonimi
                 {
-                    System.Threading.Thread.Sleep(1000);
                     button.Source = ImageSource.FromFile("questionmark.png");
+                    buttonBefore.Source = ImageSource.FromFile("questionmark.png");
+                    button.IsEnabled = true;
+                    buttonBefore.IsEnabled = true;
                 }
-                 //Cosi se è gia stato premuto se lo ripremerà non ci saranno errori e il button verrà disabilitato
             }
         }
-        button.Opacity= 1; //In questo modo anche se il button è disabled non verrà modificata la sua opacity essendo che quella di base è = 1
-        countForFlags++;
+        countForFlags++; // => capire a che giro ci troviamo 
+        appoggio = matrix[row, column]; //Appoggio assume la bandiera del button precedente 
+        buttonBefore = button; //ButtonBefore assume le caratteristiche del button precedente
+        button.Opacity = 1;
     }
 }
