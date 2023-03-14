@@ -83,16 +83,27 @@ public partial class SinglePlayer : ContentPage
     private void Button_Clicked(object sender, EventArgs e)
     {
         //Button premuto
-        var button = (ImageButton)sender;  
-        //Ottengo la riga e la colonna
+        var button = (ImageButton)sender;
         int row = Grid.GetRow(button);
         int column = Grid.GetColumn(button);
-        if(button.IsEnabled == true)
+        string[] numero = new string[2]; 
+        //Ottengo la riga e la colonna
+        if (button.IsEnabled == true)
         {
-            if(countForFlags < indexFlags.Length) //Cosi se ritorno la singleplayer dopo aver giocato, l'applicazione non crasha 
+            if(countForFlags < 2) //Cosi se ritorno la singleplayer dopo aver giocato, l'applicazione non crasha 
             {
                 button.Source = ImageSource.FromFile("b" + Convert.ToString(vett[indexFlags[countForFlags]]) + ".png");
-                button.IsEnabled = false; //Cosi se è gia stato premuto se lo ripremerà non ci saranno errori e il button verrà disabilitato
+                numero[countForFlags] = "b" + Convert.ToString(vett[indexFlags[countForFlags]]) + ".png";
+                if (numero[countForFlags] == numero[1])
+                {
+                    button.IsEnabled = false;
+                }
+                else
+                {
+                    System.Threading.Thread.Sleep(1000);
+                    button.Source = ImageSource.FromFile("questionmark.png");
+                }
+                 //Cosi se è gia stato premuto se lo ripremerà non ci saranno errori e il button verrà disabilitato
             }
         }
         button.Opacity= 1; //In questo modo anche se il button è disabled non verrà modificata la sua opacity essendo che quella di base è = 1

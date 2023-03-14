@@ -11,7 +11,7 @@ public static class MauiProgram
         builder
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit()
-			.ConfigureFonts(fonts =>
+            .ConfigureFonts(fonts =>
 			{
                 fonts.AddFont("Comfortaa-Bold.ttf", "ComfortaaBold");
                 fonts.AddFont("Lexend-Bold.ttf", "LexendBold");

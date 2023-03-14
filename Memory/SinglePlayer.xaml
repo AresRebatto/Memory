@@ -30,7 +30,8 @@
                 BackgroundColor="Transparent"
                 HorizontalOptions="Start"
                 Clicked="LeftArrow_Clicked"
-                Margin="15, 15, 0, 0"/>
+                Margin="15, 15, 0, 0"
+                VerticalOptions="Start"/>
             <!--Il frame serve per modificare alcune impostazioni del picker come il corner radius, che nel picker non si potrebbe modificare-->
             <Frame CornerRadius="10" WidthRequest="200" HeightRequest="34" Margin="0,40,0,0"> 
                 <Picker 
