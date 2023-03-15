@@ -9,9 +9,9 @@ public partial class SinglePlayer : ContentPage
     private int[,] matrixCheck = new int[2, 3];
     private int[] valueRndRows = new int[6];
     private int[] valueRndColumns = new int[6];
-    private int countInziale = 0, countFinale, countTimes = 0, count = 0, indexVett = 0, countForFlags = 0, countForArraysStrings = 0;
+    private int countInziale = 0, countFinale, countTimes = 0, count = 0, indexVett = 0, countForFlags = 0;
     private ImageButton buttonBefore;
-    private int appoggio;
+    private int appoggio, appoggio2 = 0;
     public SinglePlayer()
 	{
 		InitializeComponent();
@@ -60,7 +60,7 @@ public partial class SinglePlayer : ContentPage
             countFinale = indexFlags.Length;
         }
         /*
-         * Questa matrice conterrà le bandiere e le loro posizioni corrisponderanno alle posizioni dei buttons 
+            * Questa matrice conterrà le bandiere e le loro posizioni corrisponderanno alle posizioni dei buttons 
          */
         for(int i = 0; i < matrix.GetLength(0); i++)
         {
@@ -94,9 +94,9 @@ public partial class SinglePlayer : ContentPage
     {
         App.Current.MainPage = new MainPage();
     }
-    private void Button_Clicked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
-        //Button premuto
+        //Button premuto    
         var button = (ImageButton)sender;
         //Prendo la riga e la colonna dei buttons per poi assegnarli la giusta bandiera che si trova all'interno della matrice già riempita (matrix)
         int row = Grid.GetRow(button);
@@ -106,7 +106,7 @@ public partial class SinglePlayer : ContentPage
             button.Source = ImageSource.FromFile("b" + Convert.ToString(matrix[row, column])+".png");
             if(countForFlags == 0) //Per disabilitare il primo button
                 button.IsEnabled = false;
-            if(countForFlags > 0 && countForFlags % 2 != 0)
+            if(countForFlags > 0 && countForFlags % 2 != 0) //dispari pk quando ho scelto il secondo button il contatore sarà dispari
             {
                 if (matrix[row, column] == appoggio) //Se la bandiera del button di ora è uguale a quella del button di prima => li disabiliti
                 {
@@ -115,6 +115,8 @@ public partial class SinglePlayer : ContentPage
                 }
                 else //Se la bandiera di ora è diversa da quella di prima => entrambi i button allora ritorneranno anonimi
                 {
+
+                    await Task.Delay(250); //Attesa prima che i buttons ritornano con la question
                     button.Source = ImageSource.FromFile("questionmark.png");
                     buttonBefore.Source = ImageSource.FromFile("questionmark.png");
                     button.IsEnabled = true;
