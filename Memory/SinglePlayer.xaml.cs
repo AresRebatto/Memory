@@ -103,12 +103,12 @@ public partial class SinglePlayer : ContentPage
         //Prendo la riga e la colonna dei buttons per poi assegnarli la giusta bandiera che si trova all'interno della matrice già riempita (matrix)
         int row = Grid.GetRow(button);
         int column = Grid.GetColumn(button);
-        if(button.IsEnabled == true)
+        if (button.IsEnabled)
         {
-            button.Source = ImageSource.FromFile("b" + Convert.ToString(matrix[row, column])+".png");
-            if(countForFlags == 0) //Per disabilitare il primo button
+            button.Source = ImageSource.FromFile("b" + Convert.ToString(matrix[row, column]) + ".png");
+            if (countForFlags == 0) //Per disabilitare il primo button
                 button.IsEnabled = false;
-            if(countForFlags > 0 && countForFlags % 2 != 0) //dispari pk quando ho scelto il secondo button il contatore sarà dispari
+            else if (countForFlags % 2 != 0) //dispari pk quando ho scelto il secondo button il contatore sarà dispari
             {
                 if (matrix[row, column] == appoggio) //Se la bandiera del button di ora è uguale a quella del button di prima => li disabiliti
                 {
@@ -117,14 +117,19 @@ public partial class SinglePlayer : ContentPage
                 }
                 else //Se la bandiera di ora è diversa da quella di prima => entrambi i button allora ritorneranno anonimi
                 {
-                    foreach (ImageButton button2 in myGrid.Children)
+                    foreach (var child in myGrid.Children)
                     {
-                        if (button2.IsEnabled == true)
+                        if (child is ImageButton button2 && button2.IsEnabled)
                             notEnabledButtons.Add(button2);
-                        if (button.IsEnabled == button2.IsEnabled) // Utilizza l'operatore di confronto invece di assegnamento
-                            button2.IsEnabled = false;
                     }
-                    await Task.Delay(250); //Attesa prima che i buttons ritornano con la question
+                    foreach (var button2 in notEnabledButtons)
+                    {
+                        button2.IsEnabled = false;  
+                        button2.Opacity = 1;
+                    }
+
+                    await Task.Delay(500); //Attesa prima che i buttons ritornano con la question
+
                     foreach (var button3 in notEnabledButtons)
                         button3.IsEnabled = true;
                     button.Source = ImageSource.FromFile("questionmark.png");
@@ -138,6 +143,5 @@ public partial class SinglePlayer : ContentPage
         appoggio = matrix[row, column]; //Appoggio assume la bandiera del button precedente 
         buttonBefore = button; //ButtonBefore assume le caratteristiche del button precedente
         button.Opacity = 1;
-        notEnabledButtons.Clear(); //Clear della lista
     }
 }
