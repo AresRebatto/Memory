@@ -12,6 +12,7 @@ public partial class SinglePlayer : ContentPage
     private int countInziale = 0, countFinale, countTimes = 0, count = 0, indexVett = 0, countForFlags = 0;
     private ImageButton buttonBefore;
     private int appoggio, appoggio2 = 0;
+    private List<ImageButton> notEnabledButtons = new List<ImageButton>();
     public SinglePlayer()
 	{
 		InitializeComponent();
@@ -94,6 +95,7 @@ public partial class SinglePlayer : ContentPage
     {
         App.Current.MainPage = new MainPage();
     }
+
     private async void Button_Clicked(object sender, EventArgs e)
     {
         //Button premuto    
@@ -115,8 +117,16 @@ public partial class SinglePlayer : ContentPage
                 }
                 else //Se la bandiera di ora è diversa da quella di prima => entrambi i button allora ritorneranno anonimi
                 {
-
+                    foreach (ImageButton button2 in myGrid.Children)
+                    {
+                        if (button2.IsEnabled == true)
+                            notEnabledButtons.Add(button2);
+                        if (button.IsEnabled == button2.IsEnabled) // Utilizza l'operatore di confronto invece di assegnamento
+                            button2.IsEnabled = false;
+                    }
                     await Task.Delay(250); //Attesa prima che i buttons ritornano con la question
+                    foreach (var button3 in notEnabledButtons)
+                        button3.IsEnabled = true;
                     button.Source = ImageSource.FromFile("questionmark.png");
                     buttonBefore.Source = ImageSource.FromFile("questionmark.png");
                     button.IsEnabled = true;
@@ -128,5 +138,6 @@ public partial class SinglePlayer : ContentPage
         appoggio = matrix[row, column]; //Appoggio assume la bandiera del button precedente 
         buttonBefore = button; //ButtonBefore assume le caratteristiche del button precedente
         button.Opacity = 1;
+        notEnabledButtons.Clear(); //Clear della lista
     }
 }

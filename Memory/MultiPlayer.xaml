@@ -11,21 +11,114 @@
     </ContentPage.Behaviors>
 
     <ContentPage.Resources>
-        <Style TargetType="Button" x:Key="ButtonFormattation">
+        <Style TargetType="ImageButton" x:Key="ButtonFormattation">
             <Setter Property="Margin" Value="20"/>
             <Setter Property="HeightRequest" Value="80"/>
             <Setter Property="WidthRequest" Value="80"/>
             <Setter Property="CornerRadius" Value="40"/>
             <Setter Property="BackgroundColor" Value="Orange"/>
-            <Setter Property="ImageSource" Value="questionmark.png"/>
+            <Setter Property="Source" Value="questionmark.png"/>
+            <Setter Property="IsEnabled" Value="true"/>
         </Style>
     </ContentPage.Resources>
-    <Button
-        Grid.Row="0"
-        ImageSource="leftarrow.png"
-        WidthRequest="30"
-        BackgroundColor="Transparent"
-        HorizontalOptions="Start"
-        Clicked="LeftArrow_Clicked"
-        Margin="15, 15, 0, 0"/>
+    <VerticalStackLayout>
+        <!--Grid che contiene la leftArrow e il picker-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Button
+                Grid.Row="0"
+                ImageSource="leftarrow.png"
+                WidthRequest="30"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Start"
+                Clicked="LeftArrow_Clicked"
+                Margin="15, 15, 0, 0"
+                VerticalOptions="Start"/>
+            <!--Il frame serve per modificare alcune impostazioni del picker come il corner radius, che nel picker non si potrebbe modificare-->
+            <Frame CornerRadius="10" WidthRequest="200" HeightRequest="34" Margin="0,40,0,0">
+                <Picker 
+                    Grid.Row="1"
+                    HorizontalOptions="Center" 
+                    x:Name="SceltaModalita" 
+                    WidthRequest="200" 
+                    HeightRequest="34"
+                    HorizontalTextAlignment="Center" >
+                    <Picker.ItemsSource TextColor="#440080">
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Facile</x:String>
+                            <x:String>Medio</x:String>
+                            <x:String>Difficile</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                    <Picker.TextColor>
+                        <Color>#440080</Color>
+                    </Picker.TextColor>
+                </Picker>
+            </Frame>
+        </Grid>
+
+        <Grid HorizontalOptions="Center" Margin="150" x:Name="myGrid">
+            <!--Definzione righe-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <!--Definizione colonne-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <!--Easy-->
+            <ImageButton
+               Style="{StaticResource ButtonFormattation}"
+               Grid.Row="0"
+               Grid.Column="0"
+               x:Name="button00"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattation}"
+               Grid.Row="0"
+               Grid.Column="1"
+               x:Name="button01"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattation}"
+               Grid.Row="0"
+               Grid.Column="2"
+               x:Name="button02"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattation}"
+               Grid.Row="1"
+               Grid.Column="0"
+               x:Name="button10"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattation}"
+               Grid.Row="1"
+               Grid.Column="1"
+               x:Name="button11"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattation}"
+               Grid.Row="1"
+               Grid.Column="2"
+               x:Name="button12"
+               Clicked="Button_Clicked"
+               />
+            <!--Medium-->
+
+            <!--Hard-->
+
+        </Grid>
+    </VerticalStackLayout>
 </ContentPage>

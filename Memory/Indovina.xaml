@@ -1,28 +1,60 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Memory.Indovina"
-             Title="Indovina">
-    <VerticalStackLayout
+             Title="Indovina"
+             BackgroundColor="#440080">
+   
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="LightContent" />
+    </ContentPage.Behaviors>    
+    <ContentPage.Resources>
+        <Style TargetType="Button" x:Key="ButtonFormattation">
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="HeightRequest" Value="80"/>
+            <Setter Property="WidthRequest" Value="80"/>
+            <Setter Property="CornerRadius" Value="40"/>
+        </Style>
+    </ContentPage.Resources>
+    <VerticalStackLayout  
             Spacing="25"
             Padding="30,0"
-            VerticalOptions="Center">
+            VerticalOptions="Center">  
+        <Button
+            Grid.Row="0"
+            ImageSource="leftarrow.png"
+            WidthRequest="30"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Start"
+            Clicked="LeftArrow_Clicked"
+            Margin="0, -230, 0, 0"/>
+
+
         <Image
             x:Name="bandiera"
             HorizontalOptions="Center"
             HeightRequest="200"/>
         <Label
             Text="Scrivi il nome dello stato a cui appartiene questa bandiera"
-            FontSize="32"
-            HorizontalOptions="Center"/>
+            FontSize="20"
+            HorizontalOptions="Center"
+            TextColor="White"/>
         <Entry
             x:Name="Input"
-            Placeholder="Nome"
-            HorizontalOptions="Center"/>
+            Placeholder="\tNOME"
+            HorizontalOptions="Center"
+            WidthRequest="150"
+            BackgroundColor="#EEEEEE"
+            TextColor="#440080"
+            PlaceholderColor="#440080"
+            />
         <Button
             x:Name="CounterBtn"
             Text="Invia"
             Clicked="Invio"
-            HorizontalOptions="Center" />
+            BackgroundColor="#EEEEEE"
+            HorizontalOptions="Start"
+            TextColor="#440080"/>
     </VerticalStackLayout>
 </ContentPage>
