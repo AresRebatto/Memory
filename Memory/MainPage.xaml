@@ -46,6 +46,14 @@
                         BackgroundColor="#EEEEEE"
                         TextColor="#440080"
                         FontFamily="ComfortaaBold"/>
+                <Button
+                        x:Name="Indovina"
+                        Text="INDOVINA LA BANDIERA"
+                        Clicked="Indovina_Clicked"
+                        HorizontalOptions="Center"
+                        BackgroundColor="#EEEEEE"
+                        TextColor="#440080"
+                        FontFamily="ComfortaaBold"/>
             </VerticalStackLayout>
     </ScrollView>
 
