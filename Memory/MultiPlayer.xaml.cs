@@ -10,7 +10,7 @@ public partial class MuliPlayer : ContentPage
     private int[] valueRndColumns = new int[6];
     private int countInziale = 0, countFinale, countTimes = 0, count = 0, indexVett = 0, countForFlags = 0;
     private ImageButton buttonBefore;
-    private int appoggio, appoggio2 = 0;
+    private int appoggio;
     private List<ImageButton> notEnabledButtons = new List<ImageButton>();
 
     public MuliPlayer()

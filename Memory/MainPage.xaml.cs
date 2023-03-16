@@ -1,4 +1,6 @@
-﻿namespace Memory;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
+namespace Memory;
 
 public partial class MainPage : ContentPage
 {
@@ -6,7 +8,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-	}
+    }
 
     private void SinglePlayer(object sender, EventArgs e)
     {

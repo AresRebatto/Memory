@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Memory.PopupPage"
+           CanBeDismissedByTappingOutsideOfPopup="False"
+           Size="350, 350">
+    <FlexLayout BackgroundColor="#8FA0C2" Direction="Column" JustifyContent="SpaceAround" AlignItems="Center">
+        <Label 
+            Text="Congratulazioni"
+            FontSize="Large"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontFamily="LexendBold"/>
+        <HorizontalStackLayout VerticalOptions="End" HorizontalOptions="Center">
+            <Button
+                x:Name="Home"
+                Text="Home"
+                Margin="20"
+                FontFamily="ComfortaaBold"
+                WidthRequest="130"
+                Clicked="ReturnHome"/>
+            <Button
+                x:Name="Again"
+                Text="Gioca ancora"
+                Margin="20"
+                FontFamily="ComfortaaBold"
+                WidthRequest="130"
+                Clicked="PlayAgain"/>
+        </HorizontalStackLayout>
+    </FlexLayout>
+</mct:Popup>

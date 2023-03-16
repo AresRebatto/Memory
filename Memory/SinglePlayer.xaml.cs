@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui.Views;
+
 namespace Memory;
 
 public partial class SinglePlayer : ContentPage
@@ -9,9 +11,9 @@ public partial class SinglePlayer : ContentPage
     private int[,] matrixCheck = new int[2, 3];
     private int[] valueRndRows = new int[6];
     private int[] valueRndColumns = new int[6];
-    private int countInziale = 0, countFinale, countTimes = 0, count = 0, indexVett = 0, countForFlags = 0;
+    private int countInziale = 0, countFinale, countTimes = 0, count = 0, indexVett = 0, countForFlags = 0, countForFinish = 0;
     private ImageButton buttonBefore;
-    private int appoggio, appoggio2 = 0;
+    private int appoggio;
     private List<ImageButton> notEnabledButtons = new List<ImageButton>();
     public SinglePlayer()
 	{
@@ -114,6 +116,7 @@ public partial class SinglePlayer : ContentPage
                 {
                     button.IsEnabled = false;
                     buttonBefore.IsEnabled = false;
+                    countForFinish++;
                 }
                 else //Se la bandiera di ora è diversa da quella di prima => entrambi i button allora ritorneranno anonimi
                 {
@@ -143,5 +146,17 @@ public partial class SinglePlayer : ContentPage
         appoggio = matrix[row, column]; //Appoggio assume la bandiera del button precedente 
         buttonBefore = button; //ButtonBefore assume le caratteristiche del button precedente
         button.Opacity = 1;
+        if (countForFinish == 3) //Le bandiere sono state trovate tutte
+        {
+            await Task.Delay(1000);//=>Attesa di un secondo prima che appaia il popUp
+            this.ShowPopup(new PopupPage());
+            //Ripristino tutto a prescindere che scegla di tornare alla home oppure di rimanere in single
+            foreach (ImageButton child in myGrid)
+            {
+                child.IsEnabled = true;
+                child.Source = ImageSource.FromFile("questionmark.png");
+                countForFinish = 0;
+            }
+        }
     }
 }

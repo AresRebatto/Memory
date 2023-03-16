@@ -2,17 +2,27 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="Memory.MainPage"
-             BackgroundColor="#440080">
+             x:Class="Memory.MainPage">
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="LightContent" />
     </ContentPage.Behaviors>
     <ScrollView>
-
-            <VerticalStackLayout  
+        <!--Gradienti Sfondo-->
+        <ScrollView.Background>
+            <LinearGradientBrush
+                    EndPoint="0,1">
+                <GradientStop
+                        Color="#440080"
+                        Offset="0.1"/>
+                <GradientStop
+                        Color="#C900FF"
+                        Offset="1.0"/>
+            </LinearGradientBrush>
+        </ScrollView.Background>
+        <VerticalStackLayout
                 Spacing="25"
                 Padding="35">
-                <Label
+            <Label
                     Text="Flagicon"
                     FontSize="32"
                     HorizontalOptions="Center"
@@ -23,14 +33,14 @@
                     FontFamily="LexendBold"
                     Margin="0, 0, 0, 150"
                     />
-                <Label
+            <Label
                         Text="SCEGLI LA MODALITÀ DI GIOCO"
                         FontSize="22"
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"
                         TextColor="White"
                         FontFamily="LexendBold"/>
-                <Button
+            <Button
                         x:Name="singlePlayer"
                         Text="SINGLE PLAYER"
                         Clicked="SinglePlayer"
@@ -38,7 +48,7 @@
                         BackgroundColor="#EEEEEE"
                         TextColor="#440080"
                         FontFamily="ComfortaaBold"/>
-                <Button
+            <Button
                         x:Name="MultiPlayer"
                         Text="MULTI PLAYER"
                         Clicked="MultiPlayer_Clicked"
@@ -46,7 +56,7 @@
                         BackgroundColor="#EEEEEE"
                         TextColor="#440080"
                         FontFamily="ComfortaaBold"/>
-                <Button
+            <Button
                         x:Name="Indovina"
                         Text="INDOVINA LA BANDIERA"
                         Clicked="Indovina_Clicked"
@@ -54,7 +64,6 @@
                         BackgroundColor="#EEEEEE"
                         TextColor="#440080"
                         FontFamily="ComfortaaBold"/>
-            </VerticalStackLayout>
+        </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
