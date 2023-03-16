@@ -30,7 +30,9 @@
             Clicked="LeftArrow_Clicked"
             Margin="0, -230, 0, 0"/>
 
-
+        <Label
+            Text="VITE: 3"
+            x:Name="Vite"/>
         <Image
             x:Name="bandiera"
             HorizontalOptions="Center"
@@ -42,19 +44,26 @@
             TextColor="White"/>
         <Entry
             x:Name="Input"
-            Placeholder="\tNOME"
+            Placeholder="NOME"
             HorizontalOptions="Center"
             WidthRequest="150"
             BackgroundColor="#EEEEEE"
             TextColor="#440080"
             PlaceholderColor="#440080"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
             />
+        <Label
+            x:Name="Attenzione"
+            Text=""
+            HorizontalOptions="Center"
+            TextColor="White"/>
         <Button
             x:Name="CounterBtn"
-            Text="Invia"
+            Text="INVIA"
             Clicked="Invio"
             BackgroundColor="#EEEEEE"
-            HorizontalOptions="Start"
+            HorizontalOptions="Center"
             TextColor="#440080"/>
     </VerticalStackLayout>
 </ContentPage>

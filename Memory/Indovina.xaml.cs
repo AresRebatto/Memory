@@ -6,7 +6,7 @@ public partial class Indovina : ContentPage
 {
     public Random rnd = new Random();
     public Dictionary<int, string> paesi = new Dictionary<int, string>();
-    public int num;
+    public int num, contoVite=3;
     public string[] dizionario = {"città del vaticano", "islanda", "portogallo", "macedonia",
                                   "grecia", "austria", "spagna", "montenegro", "romania", "svezia",
                                   "francia", "turchia", "bulgaria", "norvegia", "italia", "cipro",
@@ -55,48 +55,75 @@ public partial class Indovina : ContentPage
     private void Invio(object sender, EventArgs e)
     {
         int contoErrori = 0;
-        string testoInput = Input.Text.ToLower();
-        if (testoInput == (string)paesi[num])
-           DisplayAlert(Title, "cuuai", "Cancella");
-
+        string testoInput = Input.Text.ToLower().Trim();
+        if (testoInput == paesi[num])
+        {
+            DisplayAlert("", "HAI VINTO!!!", "Cancella");
+        }
         else
         {
             switch (num)
             {
                 case 1:
                     if (testoInput == "vaticano")
+                    {
                         DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                        num = rnd.Next(1, 44);
+                        bandiera.Source = ImageSource.FromFile("b" + num + ".png");
+                    }
                     break;
                 case 36:
-                    if (testoInput == "olanda")
+                    if (testoInput == "olanda")                  
+                    {
                         DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                        num = rnd.Next(1, 44);
+                        bandiera.Source = ImageSource.FromFile("b" + num + ".png");
+                    }
                     break;
                 case 10:
                     if (testoInput == "bosnia")
+                    {
                         DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                        num = rnd.Next(1, 44);
+                        bandiera.Source = ImageSource.FromFile("b" + num + ".png");
+                    }
                     break;
                 case 39:
                     if (testoInput == "regno unito")
+                    {
                         DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                        num = rnd.Next(1, 44);
+                        bandiera.Source = ImageSource.FromFile("b" + num + ".png");
+                    }
                     break;
             }
 
-        }
-        foreach (string parolacorretta in dizionario)
-        {
-            if (parolacorretta.Length == paesi[num].Length)
+            foreach (string parolacorretta in dizionario)
             {
-                for (int i = 0; i < parolacorretta.Length; i++)
-                   if (paesi[Convert.ToInt32(num)][i] != parolacorretta[i])
-                       contoErrori++;
+                if (parolacorretta.Length == paesi[num].Length)
+                {
+                    for (int i = 0; i < parolacorretta.Length; i++)
+                        if (Input.Text[i] != parolacorretta[i])
+                            contoErrori++;
+                    if (contoErrori <= (parolacorretta.Length / 3))
+                    {
+                        Attenzione.Text = "Attenzione, c'è qualcosa di sbagliato nella parola che hai scritto";
+                    }
+                }
             }
-            if (contoErrori <= (parolacorretta.Length / 3))
-                paesi[num] = parolacorretta;
-            else if (parolacorretta.Length == paesi[num].Length+1 || parolacorretta.Length == paesi[num].Length-1)
-                paesi[num] = parolacorretta;
+            if (paesi[num]!=testoInput)
+            {
+                Vite.Text = Convert.ToString(Convert.ToInt32(Vite) - 1);
+            }
+            else DisplayAlert("", "HAI VINTO!!!", "Cancella");
+        }
+        if (paesi[num] == testoInput)
+        {
+            num = rnd.Next(1, 44);
+            bandiera.Source = ImageSource.FromFile("b" + num + ".png");
         }
     }
-    private void    LeftArrow_Clicked(object sender, EventArgs e)
+    private void LeftArrow_Clicked(object sender, EventArgs e)
     {
         App.Current.MainPage = new MainPage();
     }
