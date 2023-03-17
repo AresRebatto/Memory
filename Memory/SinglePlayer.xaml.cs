@@ -11,15 +11,38 @@ public partial class SinglePlayer : ContentPage
     private int[,] matrixCheck = new int[2, 3];
     private int[] valueRndRows = new int[6];
     private int[] valueRndColumns = new int[6];
-    private int countInziale = 0, countFinale, countTimes = 0, count = 0, indexVett = 0, countForFlags = 0, countForFinish = 0;
+    private int countForFlags = 0, countForFinish = 0;
     private ImageButton buttonBefore;
     private int appoggio;
     private List<ImageButton> notEnabledButtons = new List<ImageButton>();
+    private Random rnd = new Random();
     public SinglePlayer()
 	{
 		InitializeComponent();
-        countFinale = indexFlags.Length / 2;
-        Random rnd = new Random();
+        Randomizzazione(rnd, vett, indexFlags, matrix, matrixCheck, valueRndRows, valueRndColumns, countForFlags);
+
+        SceltaModalita.SelectedItem = "Facile";
+        SceltaModalita.SelectedIndexChanged += (sender, args) =>
+        {
+            // codice per gestire l'evento di selezione dell'item
+            if (SceltaModalita.SelectedIndex == 0)
+            {
+                //numero diCoppie
+            }
+            else if (SceltaModalita.SelectedIndex == 1)
+            {
+                // codice da eseguire se l'item "Option 2" è selezionato
+            }
+            else if (SceltaModalita.SelectedIndex == 2)
+            {
+                // codice da eseguire se l'item "Option 3" è selezionato
+            }
+        };
+    }
+    
+    static void Randomizzazione (Random rnd, int[] vett, int[] indexFlags, int[,] matrix, int[,] matrixCheck, int[] valueRndRows, int[] valueRndColumns, int countForFlags)
+    {
+        int countFinale = indexFlags.Length / 2, count = 0, countInziale = 0, indexVett = 0, countTimes = 0;
         //Randomizzazione bandiere nelle posizioni del vettore
         for (int i = 0; i < vett.Length; i++)
         {
@@ -62,37 +85,20 @@ public partial class SinglePlayer : ContentPage
             countInziale = (indexFlags.Length / 2);
             countFinale = indexFlags.Length;
         }
-        /*
-            * Questa matrice conterrà le bandiere e le loro posizioni corrisponderanno alle posizioni dei buttons 
-         */
-        for(int i = 0; i < matrix.GetLength(0); i++)
+        
+            //* Questa matrice conterrà le bandiere e le loro posizioni corrisponderanno alle posizioni dei buttons 
+         
+        for (int i = 0; i < matrix.GetLength(0); i++)
         {
-            for(int j = 0; j < matrix.GetLength(1); j++) 
+            for (int j = 0; j < matrix.GetLength(1); j++)
             {
                 matrix[i, j] = vett[indexFlags[countForFlags]];
                 countForFlags++;
             }
         }
         countForFlags = 0;//Ripristinarlo
-		SceltaModalita.SelectedItem = "Facile";
-        SceltaModalita.SelectedIndexChanged += (sender, args) =>
-        {
-            // codice per gestire l'evento di selezione dell'item
-            if (SceltaModalita.SelectedIndex == 0)
-            {
-                //numero diCoppie
-            }
-            else if (SceltaModalita.SelectedIndex == 1)
-            {
-                // codice da eseguire se l'item "Option 2" è selezionato
-            }
-            else if (SceltaModalita.SelectedIndex == 2)
-            {
-                // codice da eseguire se l'item "Option 3" è selezionato
-            }
-        };
     }
-
+    
     private void LeftArrow_Clicked(object sender, EventArgs e)
     {
         App.Current.MainPage = new MainPage();
@@ -148,7 +154,10 @@ public partial class SinglePlayer : ContentPage
         button.Opacity = 1;
         if (countForFinish == 3) //Le bandiere sono state trovate tutte
         {
+            countForFinish = 0;
+            leftArrow.IsVisible = false;
             await Task.Delay(1000);//=>Attesa di un secondo prima che appaia il popUp
+            leftArrow.IsVisible = true;
             this.ShowPopup(new PopupPage());
             //Ripristino tutto a prescindere che scegla di tornare alla home oppure di rimanere in single
             foreach (ImageButton child in myGrid)
@@ -157,6 +166,10 @@ public partial class SinglePlayer : ContentPage
                 child.Source = ImageSource.FromFile("questionmark.png");
                 countForFinish = 0;
             }
+            countForFlags = 0;
+            countForFinish = 0;
+            notEnabledButtons.Clear();
+            Randomizzazione(rnd, vett, indexFlags, matrix, matrixCheck, valueRndRows, valueRndColumns, countForFlags);
         }
     }
 }
