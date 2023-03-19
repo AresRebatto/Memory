@@ -9,7 +9,8 @@
     </ContentPage.Behaviors>
     <!--Sile bottoni, in questo modo avranno tutti la stessa formattazione senza che debba andare a specificare le caratteristiche di ognuno in ognuno di essi--> 
     <ContentPage.Resources>
-        <Style TargetType="ImageButton" x:Key="ButtonFormattation">
+        <!--Button Easy-->
+        <Style TargetType="ImageButton" x:Key="ButtonFormattationEasy">
             <Setter Property="Margin" Value="20"/>
             <Setter Property="HeightRequest" Value="80"/>
             <Setter Property="WidthRequest" Value="80"/>
@@ -17,6 +18,17 @@
             <Setter Property="BackgroundColor" Value="#1E78FF"/>
             <Setter Property="Source" Value="questionmark.png"/>
             <Setter Property="IsEnabled" Value="true"/>
+        </Style>
+        <!--Button Medium && Hard-->
+        <Style TargetType="ImageButton" x:Key="ButtonFormattationMedium_Hard">
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="HeightRequest" Value="80"/>
+            <Setter Property="WidthRequest" Value="80"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="BackgroundColor" Value="#1E78FF"/>
+            <Setter Property="Source" Value="questionmark.png"/>
+            <Setter Property="IsEnabled" Value="true"/>
+            <Setter Property="IsVisible" Value="false"/>
         </Style>
     </ContentPage.Resources>
     <VerticalStackLayout>
@@ -73,9 +85,16 @@
        <Grid HorizontalOptions="Center" Margin="150" x:Name="myGrid">
        <!--Definzione righe-->
            <Grid.RowDefinitions>
-               <RowDefinition Height="auto"/>
-               <RowDefinition Height="auto"/>
-           </Grid.RowDefinitions>
+                <!--Easy-->
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <!--Medium-->
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <!--Hard-->
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
            <!--Definizione colonne-->
            <Grid.ColumnDefinitions>
                <ColumnDefinition Width="auto"/>
@@ -84,51 +103,133 @@
            </Grid.ColumnDefinitions>
            <!--Easy-->
             <ImageButton
-               Style="{StaticResource ButtonFormattation}"
+               Style="{StaticResource ButtonFormattationEasy}"
                Grid.Row="0"
                Grid.Column="0"
                x:Name="button00"
                Clicked="Button_Clicked"
                />
             <ImageButton
-               Style="{StaticResource ButtonFormattation}"
+               Style="{StaticResource ButtonFormattationEasy}"
                Grid.Row="0"
                Grid.Column="1"
                x:Name="button01"
                Clicked="Button_Clicked"
                />
             <ImageButton
-               Style="{StaticResource ButtonFormattation}"
+               Style="{StaticResource ButtonFormattationEasy}"
                Grid.Row="0"
                Grid.Column="2"
                x:Name="button02"
                Clicked="Button_Clicked"
                />
             <ImageButton
-               Style="{StaticResource ButtonFormattation}"
+               Style="{StaticResource ButtonFormattationEasy}"
                Grid.Row="1"
                Grid.Column="0"
                x:Name="button10"
                Clicked="Button_Clicked"
                />
             <ImageButton
-               Style="{StaticResource ButtonFormattation}"
+               Style="{StaticResource ButtonFormattationEasy}"
                Grid.Row="1"
                Grid.Column="1"
                x:Name="button11"
                Clicked="Button_Clicked"
                />
             <ImageButton
-               Style="{StaticResource ButtonFormattation}"
+               Style="{StaticResource ButtonFormattationEasy}"
                Grid.Row="1"
                Grid.Column="2"
                x:Name="button12"
                Clicked="Button_Clicked"
                />
-           <!--Medium-->
-       
-           <!--Hard-->
-       
-       </Grid>
+            <!--Medium-->
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="2"
+               Grid.Column="0"
+               x:Name="button20"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="2"
+               Grid.Column="1"
+               x:Name="button21"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="2"
+               Grid.Column="2"
+               x:Name="button22"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="3"
+               Grid.Column="0"
+               x:Name="button30"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="3"
+               Grid.Column="1"
+               x:Name="button31"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="3"
+               Grid.Column="2"
+               x:Name="button32"
+               Clicked="Button_Clicked"
+               />
+            <!--Hard-->
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="4"
+               Grid.Column="0"
+               x:Name="button40"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="4"
+               Grid.Column="1"
+               x:Name="button41"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="4"
+               Grid.Column="2"
+               x:Name="button42"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="5"
+               Grid.Column="0"
+               x:Name="button50"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="5"
+               Grid.Column="1"
+               x:Name="button51"
+               Clicked="Button_Clicked"
+               />
+            <ImageButton
+               Style="{StaticResource ButtonFormattationMedium_Hard}"
+               Grid.Row="5"
+               Grid.Column="2"
+               x:Name="button52"
+               Clicked="Button_Clicked"
+               />
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

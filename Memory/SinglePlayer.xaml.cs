@@ -8,9 +8,6 @@ public partial class SinglePlayer : ContentPage
     private int[] vett = new int[3];
     private int[] indexFlags = new int[6];
     private int[,] matrix = new int[2, 3];
-    private int[,] matrixCheck = new int[2, 3];
-    private int[] valueRndRows = new int[6];
-    private int[] valueRndColumns = new int[6];
     private int countForFlags = 0, countForFinish = 0;
     private ImageButton buttonBefore;
     private int appoggio;
@@ -18,8 +15,10 @@ public partial class SinglePlayer : ContentPage
     private Random rnd = new Random();
     public SinglePlayer()
 	{
-		InitializeComponent();
-        Randomizzazione(rnd, vett, indexFlags, matrix, matrixCheck, valueRndRows, valueRndColumns, countForFlags);
+        int count = 0;
+        InitializeComponent();
+
+        Randomizzazione(rnd, vett, indexFlags, matrix, countForFlags);
 
         SceltaModalita.SelectedItem = "Facile";
         SceltaModalita.SelectedIndexChanged += (sender, args) =>
@@ -27,20 +26,41 @@ public partial class SinglePlayer : ContentPage
             // codice per gestire l'evento di selezione dell'item
             if (SceltaModalita.SelectedIndex == 0)
             {
-                //numero diCoppie
+                //numero di Coppie
+                matrix = new int[2, 3];
+                vett = new int[3];
+                indexFlags = new int[6];
             }
             else if (SceltaModalita.SelectedIndex == 1)
             {
                 // codice da eseguire se l'item "Option 2" è selezionato
+                matrix = new int[4, 3];
+                vett = new int[6];
+                indexFlags = new int[12];
+                foreach(ImageButton child in myGrid)
+                {
+                    if (count > 5 && count < 12)
+                        child.IsVisible = true;
+                    count++; //Mi serve per capire a che punto mi trovo della grid 
+                }
             }
             else if (SceltaModalita.SelectedIndex == 2)
             {
                 // codice da eseguire se l'item "Option 3" è selezionato
+                matrix = new int[6, 3];
+                vett = new int[9];
+                indexFlags = new int[18];
+                foreach (ImageButton child in myGrid)
+                {
+                    if (count > 11 && count < 18)
+                        child.IsVisible = true;
+                    count++; //Mi serve per capire a che punto mi trovo della grid 
+                }
             }
         };
     }
     
-    static void Randomizzazione (Random rnd, int[] vett, int[] indexFlags, int[,] matrix, int[,] matrixCheck, int[] valueRndRows, int[] valueRndColumns, int countForFlags)
+    static void Randomizzazione (Random rnd, int[] vett, int[] indexFlags, int[,] matrix, int countForFlags)
     {
         int countFinale = indexFlags.Length / 2, count = 0, countInziale = 0, indexVett = 0, countTimes = 0;
         //Randomizzazione bandiere nelle posizioni del vettore
@@ -106,6 +126,7 @@ public partial class SinglePlayer : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
+        int count = 0;
         //Button premuto    
         var button = (ImageButton)sender;
         //Prendo la riga e la colonna dei buttons per poi assegnarli la giusta bandiera che si trova all'interno della matrice già riempita (matrix)
@@ -165,11 +186,15 @@ public partial class SinglePlayer : ContentPage
                 child.IsEnabled = true;
                 child.Source = ImageSource.FromFile("questionmark.png");
                 countForFinish = 0;
+                //Rendere invisibili i buttons dal sesto in poi
+                if (count > 5)
+                    child.IsVisible = false;
+                count++; //Per capire a che punto mi trovo della grid
             }
             countForFlags = 0;
             countForFinish = 0;
             notEnabledButtons.Clear();
-            Randomizzazione(rnd, vett, indexFlags, matrix, matrixCheck, valueRndRows, valueRndColumns, countForFlags);
+            Randomizzazione(rnd, vett, indexFlags, matrix, countForFlags);
         }
     }
 }
