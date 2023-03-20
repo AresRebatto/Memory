@@ -10,6 +10,15 @@ public partial class MuliPlayer : ContentPage
     private int[] valueRndColumns = new int[6];
     private int countInziale = 0, countFinale, countTimes = 0, count = 0, indexVett = 0, countForFlags = 0;
     private ImageButton buttonBefore;
+
+    private void Button_Clicked_1(object sender, EventArgs e)
+    {
+        if(FrstPlayer !=  null && ScndPlayer != null)
+        {
+
+        }
+    }
+
     private int appoggio;
     private List<ImageButton> notEnabledButtons = new List<ImageButton>();
 
@@ -140,5 +149,7 @@ public partial class MuliPlayer : ContentPage
         button.Opacity = 1;
         notEnabledButtons.Clear(); //Clear della lista
     }
+
+    
 
 }

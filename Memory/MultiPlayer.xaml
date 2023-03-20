@@ -10,26 +10,60 @@
         <toolkit:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="LightContent" />
     </ContentPage.Behaviors>
 
+    <!--Sile bottoni, in questo modo avranno tutti la stessa formattazione senza che debba andare a specificare le caratteristiche di ognuno in ognuno di essi-->
     <ContentPage.Resources>
         <Style TargetType="ImageButton" x:Key="ButtonFormattation">
             <Setter Property="Margin" Value="20"/>
             <Setter Property="HeightRequest" Value="80"/>
             <Setter Property="WidthRequest" Value="80"/>
-            <Setter Property="CornerRadius" Value="40"/>
-            <Setter Property="BackgroundColor" Value="Orange"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="BackgroundColor" Value="#1E78FF"/>
             <Setter Property="Source" Value="questionmark.png"/>
             <Setter Property="IsEnabled" Value="true"/>
         </Style>
     </ContentPage.Resources>
     <VerticalStackLayout>
+        <VerticalStackLayout.Background>
+            <LinearGradientBrush
+                    EndPoint="0,1">
+                <GradientStop
+                        Color="#7D11D3" 
+                        Offset="0.1"/>
+                <GradientStop
+                        Color="#B671C9"
+                        Offset="1.0"/>
+            </LinearGradientBrush>
+        </VerticalStackLayout.Background>
         <!--Grid che contiene la leftArrow e il picker-->
-        <Grid>
+       
+        <Entry 
+            x:Name="FrstPlayer"
+            Placeholder="Giocatore 1"
+            BackgroundColor="#EEEEEE"
+            WidthRequest="200"
+            Margin="0, 300, 0, 0"
+            />
+        <Entry 
+            x:Name="ScndPlayer"
+            Placeholder="Giocatore 2"
+            BackgroundColor="#EEEEEE"
+            WidthRequest="200"
+            Margin="0, 20, 0, 0"/>
+        <Button 
+            WidthRequest="100"
+            Text="Avvia partita"
+            Margin="100, 20, 0, 0"
+            Clicked="Button_Clicked_1"/>
+        <Grid
+            x:Name="grigliaUno"
+            IsVisible="False">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Button
                 Grid.Row="0"
+                x:Name="leftArrow"
                 ImageSource="leftarrow.png"
                 WidthRequest="30"
                 BackgroundColor="Transparent"
@@ -60,7 +94,11 @@
             </Frame>
         </Grid>
 
-        <Grid HorizontalOptions="Center" Margin="150" x:Name="myGrid">
+        <Grid 
+            HorizontalOptions="Center" 
+            Margin="150" 
+            x:Name="myGrid"
+            IsVisible="False">
             <!--Definzione righe-->
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
