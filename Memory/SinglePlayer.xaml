@@ -60,7 +60,7 @@
                 Margin="15, 15, 0, 0"
                 VerticalOptions="Start"/>
             <!--Il frame serve per modificare alcune impostazioni del picker come il corner radius, che nel picker non si potrebbe modificare-->
-            <Frame CornerRadius="10" WidthRequest="200" HeightRequest="34" Margin="0,40,0,0">
+            <Frame x:Name="framePicker" CornerRadius="10" WidthRequest="200" HeightRequest="34" Margin="0,40,0,0">
                 <Picker 
                     Grid.Row="1"
                     SelectedIndexChanged="SceltaModalita_SelectedIndexChanged"

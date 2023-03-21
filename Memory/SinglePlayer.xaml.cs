@@ -56,7 +56,7 @@ public partial class SinglePlayer : ContentPage
         }
         myGrid.IsVisible = true; 
         Randomizzazione(rnd, vett, indexFlags, matrix, countForFlags);
-        SceltaModalita.IsVisible = false;
+        framePicker.IsVisible = false;
     }
 
     static void Randomizzazione (Random rnd, int[] vett, int[] indexFlags, int[,] matrix, int countForFlags)
@@ -191,7 +191,7 @@ public partial class SinglePlayer : ContentPage
             countForFinish = 0;
             notEnabledButtons.Clear();
             myGrid.IsVisible = false;
-            SceltaModalita.IsVisible = true;
+            framePicker.IsVisible = true;
         }
         //Randomizzazione(rnd, vett, indexFlags, matrix, countForFlags);
     }
