@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Views;
+using System.Collections.ObjectModel;
 
 namespace Memory;
 
@@ -11,10 +12,10 @@ public partial class SinglePlayer : ContentPage
     private int countForFlags = 0, countForFinish = 0;
     private ImageButton buttonBefore;
     private int appoggio;
-    private List<ImageButton> notEnabledButtons = new List<ImageButton>();
-    private Random rnd = new Random();
+    private ObservableCollection<ImageButton> notEnabledButtons = new ObservableCollection<ImageButton>();
+    private static readonly Random rnd = new Random();
     public SinglePlayer()
-	{
+    {
         InitializeComponent();
     }
     private void SceltaModalita_SelectedIndexChanged(object sender, EventArgs e)
@@ -25,41 +26,29 @@ public partial class SinglePlayer : ContentPage
         {
             //numero di Coppie
             matrix = new int[2, 3];
-            vett = new int[3];
-            indexFlags = new int[6];
         }
         else if (SceltaModalita.SelectedIndex == 1)
         {
             // codice da eseguire se l'item "Option 2" è selezionato
             matrix = new int[4, 3];
-            vett = new int[6];
-            indexFlags = new int[12];
-            foreach (ImageButton child in myGrid.Children)
-            {
-                if (count > 5 && count < 12)
-                    child.IsVisible = true;
-                count++; //Mi serve per capire a che punto mi trovo della grid 
-            }
+            for (count = 6; count < 12; count++)
+                ((ImageButton)myGrid.Children[count]).IsVisible = true;
         }
         else if (SceltaModalita.SelectedIndex == 2)
         {
             // codice da eseguire se l'item "Option 3" è selezionato
             matrix = new int[6, 3];
-            vett = new int[9];
-            indexFlags = new int[18];
-            foreach (ImageButton child in myGrid.Children)
-            {
-                if (count < 18)
-                    child.IsVisible = true;
-                count++; //Mi serve per capire a che punto mi trovo della grid 
-            }
+            for (count = 6; count < 18; count++)
+                ((ImageButton)myGrid.Children[count]).IsVisible = true;
         }
-        myGrid.IsVisible = true; 
-        Randomizzazione(rnd, vett, indexFlags, matrix, countForFlags);
-        framePicker.IsVisible = false;
+        vett = new int[(matrix.GetLength(0) * matrix.GetLength(1)) / 2];
+        indexFlags = new int[matrix.Length];
+        myGrid.IsVisible = true;
+        SceltaModalita.IsVisible = false;
+        Randomizzazione(vett, indexFlags, matrix, countForFlags);
     }
 
-    static void Randomizzazione (Random rnd, int[] vett, int[] indexFlags, int[,] matrix, int countForFlags)
+    private void Randomizzazione(int[] vett, int[] indexFlags, int[,] matrix, int countForFlags)
     {
         int countFinale = indexFlags.Length / 2, count = 0, countInziale = 0, indexVett = 0, countTimes = 0;
         //Randomizzazione bandiere nelle posizioni del vettore
@@ -102,9 +91,9 @@ public partial class SinglePlayer : ContentPage
             countInziale = (indexFlags.Length / 2);
             countFinale = indexFlags.Length;
         }
-        
-            //* Questa matrice conterrà le bandiere e le loro posizioni corrisponderanno alle posizioni dei buttons 
-         
+
+        //* Questa matrice conterrà le bandiere e le loro posizioni corrisponderanno alle posizioni dei buttons 
+
         for (int i = 0; i < matrix.GetLength(0); i++)
         {
             for (int j = 0; j < matrix.GetLength(1); j++)
@@ -115,7 +104,7 @@ public partial class SinglePlayer : ContentPage
         }
         countForFlags = 0;//Ripristinarlo
     }
-    
+
     private void LeftArrow_Clicked(object sender, EventArgs e)
     {
         App.Current.MainPage = new MainPage();
@@ -151,7 +140,7 @@ public partial class SinglePlayer : ContentPage
                     }
                     foreach (var button2 in notEnabledButtons)
                     {
-                        button2.IsEnabled = false;  
+                        button2.IsEnabled = false;
                         button2.Opacity = 1;
                     }
 
@@ -170,7 +159,7 @@ public partial class SinglePlayer : ContentPage
         appoggio = matrix[row, column]; //Appoggio assume la bandiera del button precedente 
         buttonBefore = button; //ButtonBefore assume le caratteristiche del button precedente
         button.Opacity = 1;
-        if (countForFinish == (matrix.GetLength(0)*matrix.GetLength(1))/2) //Le bandiere sono state trovate tutte
+        if (countForFinish == (matrix.GetLength(0) * matrix.GetLength(1)) / 2) //Le bandiere sono state trovate tutte
         {
             countForFinish = 0;
             leftArrow.IsVisible = false;
@@ -191,7 +180,7 @@ public partial class SinglePlayer : ContentPage
             countForFinish = 0;
             notEnabledButtons.Clear();
             myGrid.IsVisible = false;
-            framePicker.IsVisible = true;
+            SceltaModalita.IsVisible = true;
         }
         //Randomizzazione(rnd, vett, indexFlags, matrix, countForFlags);
     }
