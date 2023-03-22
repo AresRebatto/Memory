@@ -1,5 +1,4 @@
 using CommunityToolkit.Maui.Views;
-using System.Collections.ObjectModel;
 
 namespace Memory;
 
@@ -12,8 +11,8 @@ public partial class SinglePlayer : ContentPage
     private int countForFlags = 0, countForFinish = 0;
     private ImageButton buttonBefore;
     private int appoggio;
-    private ObservableCollection<ImageButton> notEnabledButtons = new ObservableCollection<ImageButton>();
-    private static readonly Random rnd = new Random();
+    private List<ImageButton> notEnabledButtons = new List<ImageButton>();
+    private Random rnd = new Random();
     public SinglePlayer()
 	{
         InitializeComponent();
@@ -35,8 +34,12 @@ public partial class SinglePlayer : ContentPage
             matrix = new int[4, 3];
             vett = new int[6];
             indexFlags = new int[12];
-            for (count = 6; count < 12; count++)
-                ((ImageButton)myGrid.Children[count]).IsVisible = true;
+            foreach (ImageButton child in myGrid.Children)
+            {
+                if (count > 5 && count < 12)
+                    child.IsVisible = true;
+                count++; //Mi serve per capire a che punto mi trovo della grid 
+            }
         }
         else if (SceltaModalita.SelectedIndex == 2)
         {
@@ -44,15 +47,19 @@ public partial class SinglePlayer : ContentPage
             matrix = new int[6, 3];
             vett = new int[9];
             indexFlags = new int[18];
-            for (count = 6; count < 18; count++)
-                ((ImageButton)myGrid.Children[count]).IsVisible = true;
+            foreach (ImageButton child in myGrid.Children)
+            {
+                if (count < 18)
+                    child.IsVisible = true;
+                count++; //Mi serve per capire a che punto mi trovo della grid 
+            }
         }
-        myGrid.IsVisible = true;
+        myGrid.IsVisible = true; 
+        Randomizzazione(rnd, vett, indexFlags, matrix, countForFlags);
         SceltaModalita.IsVisible = false;
-        Randomizzazione(vett, indexFlags, matrix, countForFlags);
     }
 
-    private void Randomizzazione (int[] vett, int[] indexFlags, int[,] matrix, int countForFlags)
+    static void Randomizzazione (Random rnd, int[] vett, int[] indexFlags, int[,] matrix, int countForFlags)
     {
         int countFinale = indexFlags.Length / 2, count = 0, countInziale = 0, indexVett = 0, countTimes = 0;
         //Randomizzazione bandiere nelle posizioni del vettore
