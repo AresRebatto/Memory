@@ -12,12 +12,14 @@ public partial class Indovina : ContentPage
                                   "francia", "turchia", "bulgaria", "norvegia", "italia", "cipro",
                                   "ungheria","danimarca","serbia","repubblica ceca", "polonia", "bosnia erzegovina",
                                   "finlandia", "russia", "croazia", "lituania", "belgio", "lussemburgo", "lettonia",
-                                  "paesi bassi","olanda", "regno unito"};
+                                  "paesi bassi","olanda", "regno unito", "san marino", "malta", "monaco", "svizzera",
+                                  "bielorussia", "estonia", "albania", "slovacchia", "slovenia", "irlanda"};
     public Indovina()
     {
         InitializeComponent();
         num = rnd.Next(1, 44);
         paesi.Add(1, "città del vaticano");
+        paesi.Add(3, "san marino");
         paesi.Add(16, "islanda");
         paesi.Add(40, "portogallo");
         paesi.Add(5, "macedonia");
@@ -47,9 +49,19 @@ public partial class Indovina : ContentPage
         paesi.Add(35, "belgio");
         paesi.Add(12, "lussemburgo");
         paesi.Add(24, "lettonia");
+        paesi.Add(4, "malta");
         paesi.Add(36, "paesi bassi");
         paesi.Add(37, "germania");
         paesi.Add(2, "moldavia");
+        paesi.Add(13, "monaco");
+        paesi.Add(14, "svizzera");
+        paesi.Add(15, "bielorussia");
+        paesi.Add(25, "estonia");
+        paesi.Add(26, "albania");
+        paesi.Add(27, "slovacchia");
+        paesi.Add(28, "slovenia");
+        paesi.Add(38, "irlanda");
+
         bandiera.Source = ImageSource.FromFile("b" + num + ".png");
     }
     private void Invio(object sender, EventArgs e)
@@ -107,7 +119,7 @@ public partial class Indovina : ContentPage
                             contoErrori++;
                     if (contoErrori <= (parolacorretta.Length / 3))
                     {
-                        Attenzione.Text = "Attenzione, c'è qualcosa di sbagliato nella parola che hai scritto";
+                        DisplayAlert("", "HAI VINTO!!!", "Cancella");
                     }
                 }
             }
@@ -122,6 +134,7 @@ public partial class Indovina : ContentPage
             num = rnd.Next(1, 44);
             bandiera.Source = ImageSource.FromFile("b" + num + ".png");
         }
+        Input.Text = "";
     }
     private void LeftArrow_Clicked(object sender, EventArgs e)
     {
