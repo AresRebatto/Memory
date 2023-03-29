@@ -29,14 +29,14 @@ public partial class SinglePlayer : ContentPage
         }
         else if (SceltaModalita.SelectedIndex == 1)
         {
-            // codice da eseguire se l'item "Option 2" è selezionato
+            // codice da eseguire se l'item "Option 2" Ã¨ selezionato
             matrix = new int[4, 3];
             for (count = 6; count < 12; count++)
                 ((ImageButton)myGrid.Children[count]).IsVisible = true;
         }
         else if (SceltaModalita.SelectedIndex == 2)
         {
-            // codice da eseguire se l'item "Option 3" è selezionato
+            // codice da eseguire se l'item "Option 3" Ã¨ selezionato
             matrix = new int[6, 3];
             for (count = 6; count < 18; count++)
                 ((ImageButton)myGrid.Children[count]).IsVisible = true;
@@ -50,41 +50,56 @@ public partial class SinglePlayer : ContentPage
 
     private void Randomizzazione(int[] vett, int[] indexFlags, int[,] matrix, int countForFlags)
     {
-        int count = 0, temp = 0;
+        int countFinale = indexFlags.Length / 2, count = 0, countInziale = 0, indexVett = 0, countTimes = 0;
         //Randomizzazione bandiere nelle posizioni del vettore
         for (int i = 0; i < vett.Length; i++)
         {
             do
             {
-                temp = rnd.Next(1, 43);
-            } while (Array.IndexOf(vett, temp) != -1);
-            vett[i] = temp;
+                vett[i] = rnd.Next(1, 43);
+                for (int j = 0; j < i + 1; j++)
+                {
+                    if (j != i)
+                    {
+                        if (vett[j] == vett[i])
+                            count++;
+                    }
+                }
+            } while (count != 0);
         }
         //Randomizzazione posizioni del vettore. //3 randomizzazioni per 2 volte => devono venire fuori 6 posizioni, 3 uguali
-        for (int i = 0; i < matrix.GetLength(0) * matrix.GetLength(1); i++)
+        for (int giro = 0; giro < 2; giro++)
         {
-            do
+            for (int parteVett = countInziale; parteVett < countFinale; parteVett++)
             {
-                countForFlags = 0;
-                temp = rnd.Next(0, vett.Length);
-                /*
-                    Controllo che non si ripetano piu di due volte gli stessi valori
-                */
-                for (int j = 0; j < i; j++)
-                    if (indexFlags[j] == temp)
-                        countForFlags++;
-            } while (countForFlags >= 2);
-            indexFlags[i] = temp;
+                do
+                {
+                    count = 0;
+                    indexVett = rnd.Next(0, vett.Length);
+                    indexFlags[countTimes] = rnd.Next(0, vett.Length);
+                    for (int j = countInziale; j < countTimes + 1; j++)
+                    {
+                        if (j != countTimes)
+                        {
+                            if (indexFlags[j] == indexFlags[countTimes])
+                                count++;
+                        }
+                    }
+                } while (count != 0);
+                countTimes++;
+            }
+            countInziale = (indexFlags.Length / 2);
+            countFinale = indexFlags.Length;
         }
 
-        //* Questa matrice conterrà le bandiere e le loro posizioni corrisponderanno alle posizioni dei buttons 
+        //* Questa matrice conterrÃ  le bandiere e le loro posizioni corrisponderanno alle posizioni dei buttons 
 
         for (int i = 0; i < matrix.GetLength(0); i++)
         {
             for (int j = 0; j < matrix.GetLength(1); j++)
             {
-                matrix[i, j] = vett[indexFlags[count]];
-                count++;
+                matrix[i, j] = vett[indexFlags[countForFlags]];
+                countForFlags++;
             }
         }
         countForFlags = 0;//Ripristinarlo
@@ -100,7 +115,7 @@ public partial class SinglePlayer : ContentPage
         int count = 0;
         //Button premuto    
         var button = (ImageButton)sender;
-        //Prendo la riga e la colonna dei buttons per poi assegnarli la giusta bandiera che si trova all'interno della matrice già riempita (matrix)
+        //Prendo la riga e la colonna dei buttons per poi assegnarli la giusta bandiera che si trova all'interno della matrice giÃ  riempita (matrix)
         int row = Grid.GetRow(button);
         int column = Grid.GetColumn(button);
         if (button.IsEnabled)
@@ -108,15 +123,15 @@ public partial class SinglePlayer : ContentPage
             button.Source = ImageSource.FromFile("b" + Convert.ToString(matrix[row, column]) + ".png");
             if (countForFlags == 0) //Per disabilitare il primo button
                 button.IsEnabled = false;
-            else if (countForFlags % 2 != 0) //dispari pk quando ho scelto il secondo button il contatore sarà dispari
+            else if (countForFlags % 2 != 0) //dispari pk quando ho scelto il secondo button il contatore sarÃ  dispari
             {
-                if (matrix[row, column] == appoggio) //Se la bandiera del button di ora è uguale a quella del button di prima => li disabiliti
+                if (matrix[row, column] == appoggio) //Se la bandiera del button di ora Ã¨ uguale a quella del button di prima => li disabiliti
                 {
                     button.IsEnabled = false;
                     buttonBefore.IsEnabled = false;
                     countForFinish++;
                 }
-                else //Se la bandiera di ora è diversa da quella di prima => entrambi i button allora ritorneranno anonimi
+                else //Se la bandiera di ora Ã¨ diversa da quella di prima => entrambi i button allora ritorneranno anonimi
                 {
                     foreach (var child in myGrid.Children)
                     {
@@ -164,7 +179,6 @@ public partial class SinglePlayer : ContentPage
             countForFlags = 0;
             countForFinish = 0;
             notEnabledButtons.Clear();
-            SceltaModalita.SelectedIndex = -1; //In questo modo posso riscegliere la stessa modalità quando RIGIOCO
             myGrid.IsVisible = false;
             SceltaModalita.IsVisible = true;
         }
