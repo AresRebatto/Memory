@@ -22,6 +22,11 @@
         <VerticalStackLayout
                 Spacing="25"
                 Padding="35">
+            <!--Setting / Bookshelf-->
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="250">
+                <Image Source="setting.png"/>
+                <Image Source="book.png"/>
+            </HorizontalStackLayout>
             <Label
                     Text="Flagicon"
                     FontSize="32"
