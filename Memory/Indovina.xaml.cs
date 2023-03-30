@@ -4,8 +4,8 @@ namespace Memory;
 
 public partial class Indovina : ContentPage
 {
-    public Random rnd = new();
-    public Dictionary<int, string> paesi = new();
+    public Random rnd = new Random();
+    public Dictionary<int, string> paesi = new Dictionary<int, string>();
     public int num, contoVite=3;
     public string[] dizionario = {"città del vaticano", "islanda", "portogallo", "macedonia",
                                   "grecia", "austria", "spagna", "montenegro", "romania", "svezia",
@@ -61,6 +61,7 @@ public partial class Indovina : ContentPage
         paesi.Add(27, "slovacchia");
         paesi.Add(28, "slovenia");
         paesi.Add(38, "irlanda");
+
         bandiera.Source = ImageSource.FromFile("b" + num + ".png");
     }
     private void Invio(object sender, EventArgs e)
@@ -68,7 +69,9 @@ public partial class Indovina : ContentPage
         int contoErrori = 0;
         string testoInput = Input.Text.ToLower().Trim();
         if (testoInput == paesi[num])
+        {
             DisplayAlert("", "HAI VINTO!!!", "Cancella");
+        }
         else
         {
             switch (num)
@@ -115,13 +118,16 @@ public partial class Indovina : ContentPage
                         if (Input.Text[i] != parolacorretta[i])
                             contoErrori++;
                     if (contoErrori <= (parolacorretta.Length / 3))
+                    {
                         DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                    }
                 }
             }
             if (paesi[num]!=testoInput)
+            {
                 Vite.Text = Convert.ToString(Convert.ToInt32(Vite) - 1);
-            else 
-                DisplayAlert("", "HAI VINTO!!!", "Cancella");
+            }
+            else DisplayAlert("", "HAI VINTO!!!", "Cancella");
         }
         if (paesi[num] == testoInput)
         {
