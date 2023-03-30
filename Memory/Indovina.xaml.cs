@@ -5,6 +5,7 @@ namespace Memory;
 public partial class Indovina : ContentPage
 {
     public Random rnd = new Random();
+    public int vite;
     public Dictionary<int, string> paesi = new Dictionary<int, string>();
     public int num, contoVite=3;
     public string[] dizionario = {"città del vaticano", "islanda", "portogallo", "macedonia",
@@ -112,27 +113,52 @@ public partial class Indovina : ContentPage
 
             foreach (string parolacorretta in dizionario)
             {
-                if (parolacorretta.Length == paesi[num].Length)
+                if (parolacorretta.Length == testoInput.Length)
                 {
-                    for (int i = 0; i < parolacorretta.Length; i++)
-                        if (Input.Text[i] != parolacorretta[i])
-                            contoErrori++;
-                    if (contoErrori <= (parolacorretta.Length / 3))
+                    if (parolacorretta == paesi[num])
                     {
-                        DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                        for (int i = 0; i < parolacorretta.Length; i++)
+                            if (Input.Text[i] != parolacorretta[i])
+                                contoErrori++;
+                        if (contoErrori <= (parolacorretta.Length / 3))
+                        {
+                            DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                            testoInput = parolacorretta;
+                        }
+                    }
+                }
+                else
+                {
+                    if (parolacorretta == paesi[num])
+                    {
+                        if (parolacorretta.Length < paesi[num].Length)
+                            for (int i = 0; i < parolacorretta.Length; i++)
+                                if (Input.Text[i] != parolacorretta[i])
+                                    contoErrori++;
+                        if (parolacorretta.Length > paesi[num].Length)
+                            for (int i = 0; i < paesi[num].Length; i++)
+                                if (Input.Text[i] != parolacorretta[i])
+                                    contoErrori++;
+                        if (contoErrori <= (parolacorretta.Length / 3))
+                        {
+                            DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                            testoInput = parolacorretta;
+                        }
                     }
                 }
             }
-            if (paesi[num]!=testoInput)
-            {
-                Vite.Text = Convert.ToString(Convert.ToInt32(Vite) - 1);
-            }
-            else DisplayAlert("", "HAI VINTO!!!", "Cancella");
+
         }
+        
         if (paesi[num] == testoInput)
         {
             num = rnd.Next(1, 44);
             bandiera.Source = ImageSource.FromFile("b" + num + ".png");
+        }
+        else
+        {
+            vite = Convert.ToInt32(Vite.Text);
+            Vite.Text = (vite--).ToString();
         }
         Input.Text = "";
     }
