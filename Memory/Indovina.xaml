@@ -8,7 +8,7 @@
    
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="LightContent" />
-    </ContentPage.Behaviors>    
+    </ContentPage.Behaviors>
     <ContentPage.Resources>
         <Style TargetType="Button" x:Key="ButtonFormattation">
             <Setter Property="Margin" Value="20"/>
@@ -17,10 +17,11 @@
             <Setter Property="CornerRadius" Value="40"/>
         </Style>
     </ContentPage.Resources>
+
     <VerticalStackLayout  
             Spacing="25"
             Padding="30,0"
-            VerticalOptions="Center">  
+            VerticalOptions="Center">
         <Button
             Grid.Row="0"
             ImageSource="leftarrow.png"
@@ -28,42 +29,72 @@
             BackgroundColor="Transparent"
             HorizontalOptions="Start"
             Clicked="LeftArrow_Clicked"
-            Margin="0, -230, 0, 0"/>
+            Margin="5, -250, 5, 5"
+            Padding="50"/>
+        <HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Start">
+                <Label
+                    FontSize="12.5"
+                    Text="VITE: "
+                    TextColor="White"
+                    FontFamily="ComfortaaBold"/>
+                <Label
+                    FontSize="12.5"
+                    Text="3"
+                    x:Name="Vite"
+                    TextColor="White"
+                    FontFamily="ComfortaaBold"/>
+            </HorizontalStackLayout>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="End">
+            <Label
+                FontSize="12.5"
+                Text="PUNTI: "
+                Margin="0,-45"
+                TextColor="White"
+                FontFamily="ComfortaaBold"/>
+            <Label
+                FontSize="12.5"
+                x:Name="Score"
+                Text="0"
+                Margin="0,-45"
+                HorizontalTextAlignment="End"
+                TextColor="White"
+                FontFamily="ComfortaaBold"/>
+        </HorizontalStackLayout>
 
-        <Label
-            Text="3"
-            x:Name="Vite"/>
         <Image
             x:Name="bandiera"
             HorizontalOptions="Center"
             HeightRequest="200"/>
+
         <Label
-            Text="Scrivi il nome dello stato a cui appartiene questa bandiera"
-            FontSize="20"
-            HorizontalOptions="Center"
-            TextColor="White"/>
-        <Entry
-            x:Name="Input"
-            Placeholder="NOME"
-            HorizontalOptions="Center"
-            WidthRequest="150"
-            BackgroundColor="#EEEEEE"
-            TextColor="#440080"
-            PlaceholderColor="#440080"
+            Text="SCRIVI IL NOME DELLO STATO A CUI APPARTIENE QUESTA BANDIERA"
+            FontSize="15"
+            VerticalOptions="Center"
             HorizontalTextAlignment="Center"
+            HorizontalOptions="Center"
             VerticalTextAlignment="Center"
-            />
-        <Label
-            x:Name="Attenzione"
-            Text=""
-            HorizontalOptions="Center"
-            TextColor="White"/>
-        <Button
-            x:Name="CounterBtn"
-            Text="INVIA"
-            Clicked="Invio"
-            BackgroundColor="#EEEEEE"
-            HorizontalOptions="Center"
-            TextColor="#440080"/>
+            TextColor="White"
+            FontFamily="ComfortaaBold"/>
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
+            <Entry
+                x:Name="Input"
+                Placeholder="NOME"
+                HorizontalOptions="Center"
+                WidthRequest="150"
+                BackgroundColor="#EEEEEE"
+                TextColor="#440080"
+                PlaceholderColor="#440080"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"/>
+            <Button
+                x:Name="CounterBtn"
+                Text="INVIA"
+                Clicked="Invio"
+                BackgroundColor="#EEEEEE"
+                HorizontalOptions="Center"
+                TextColor="#440080"/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

@@ -1,13 +1,16 @@
+using CommunityToolkit.Maui.Views;
 using System.Collections.Generic;
 
 namespace Memory;
 
 public partial class Indovina : ContentPage
 {
-    public Random rnd = new Random();
+    public Random rnd = new();
     public int vite;
-    public Dictionary<int, string> paesi = new Dictionary<int, string>();
+    public int punteggio;
+    public Dictionary<int, string> paesi = new();
     public int num, contoVite=3;
+    //Dizionario per parole di controllo
     public string[] dizionario = {"città del vaticano", "islanda", "portogallo", "macedonia",
                                   "grecia", "austria", "spagna", "montenegro", "romania", "svezia",
                                   "francia", "turchia", "bulgaria", "norvegia", "italia", "cipro",
@@ -19,6 +22,7 @@ public partial class Indovina : ContentPage
     {
         InitializeComponent();
         num = rnd.Next(1, 44);
+        //Assegnazione dictionary
         paesi.Add(1, "città del vaticano");
         paesi.Add(3, "san marino");
         paesi.Add(16, "islanda");
@@ -62,104 +66,120 @@ public partial class Indovina : ContentPage
         paesi.Add(27, "slovacchia");
         paesi.Add(28, "slovenia");
         paesi.Add(38, "irlanda");
-
+        vite = Convert.ToInt32(Vite.Text);
         bandiera.Source = ImageSource.FromFile("b" + num + ".png");
     }
-    private void Invio(object sender, EventArgs e)
+    private async void Invio(object sender, EventArgs e)
     {
-        int contoErrori = 0;
-        string testoInput = Input.Text.ToLower().Trim();
+        int contoErrori=0;
+        bool control = false;
+        //Eliminazione spazi e LowerCase per il testo in input
+        string testoInput = "Questo Testo è Inutile";
+        if(Input.Text!= null)
+            testoInput = Input.Text.ToLower().Trim();
+        //Vittoria con input corretto
         if (testoInput == paesi[num])
         {
-            DisplayAlert("", "HAI VINTO!!!", "Cancella");
+            await DisplayAlert("", "CORRETTOO!!!", "CONTINUA");
+            control = true;
         }
         else
         {
+            //Aggiunti casi per paesi nominabili in più modi
             switch (num)
             {
                 case 1:
                     if (testoInput == "vaticano")
                     {
-                        DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                        await DisplayAlert("", "CORRETTOO!!!", "CONTINUA");
                         num = rnd.Next(1, 44);
                         bandiera.Source = ImageSource.FromFile("b" + num + ".png");
+                        control = true;
                     }
                     break;
                 case 36:
-                    if (testoInput == "olanda")                  
+                    if (testoInput == "olanda")
                     {
-                        DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                        await DisplayAlert("", "CORRETTOO!!!", "CONTINUA");
                         num = rnd.Next(1, 44);
                         bandiera.Source = ImageSource.FromFile("b" + num + ".png");
+                        control = true;
                     }
                     break;
                 case 10:
                     if (testoInput == "bosnia")
                     {
-                        DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                        await DisplayAlert("", "CORRETTOO!!!", "CONTINUA");
                         num = rnd.Next(1, 44);
                         bandiera.Source = ImageSource.FromFile("b" + num + ".png");
+                        control = true;
                     }
                     break;
                 case 39:
                     if (testoInput == "regno unito")
                     {
-                        DisplayAlert("", "HAI VINTO!!!", "Cancella");
+                        await DisplayAlert("", "CORRETTOO!!!", "CONTINUA");
                         num = rnd.Next(1, 44);
                         bandiera.Source = ImageSource.FromFile("b" + num + ".png");
+                        control = true;
                     }
                     break;
             }
-
-            foreach (string parolacorretta in dizionario)
+            if (control == false)
             {
-                if (parolacorretta.Length == testoInput.Length)
+                //Controllo sulla parola se non è corretta
+                foreach (string parolacorretta in dizionario)
                 {
-                    if (parolacorretta == paesi[num])
+                    if (parolacorretta.Length == testoInput.Length)
                     {
-                        for (int i = 0; i < parolacorretta.Length; i++)
-                            if (Input.Text[i] != parolacorretta[i])
-                                contoErrori++;
-                        if (contoErrori <= (parolacorretta.Length / 3))
+                        if (parolacorretta == paesi[num])
                         {
-                            DisplayAlert("", "HAI VINTO!!!", "Cancella");
-                            testoInput = parolacorretta;
-                        }
-                    }
-                }
-                else
-                {
-                    if (parolacorretta == paesi[num])
-                    {
-                        if (parolacorretta.Length < paesi[num].Length)
+                            //Conteggio numero errori
                             for (int i = 0; i < parolacorretta.Length; i++)
-                                if (Input.Text[i] != parolacorretta[i])
+                                if (testoInput[i] != parolacorretta[i])
                                     contoErrori++;
-                        if (parolacorretta.Length > paesi[num].Length)
-                            for (int i = 0; i < paesi[num].Length; i++)
-                                if (Input.Text[i] != parolacorretta[i])
-                                    contoErrori++;
-                        if (contoErrori <= (parolacorretta.Length / 3))
+                            //Se c'è un basso numero di errori in base alla lunghezza della parola la si da buona
+                            if (contoErrori <= (parolacorretta.Length / 3))
+                            {
+                                await DisplayAlert("CORRETTOO!!!", "C'erano " + contoErrori + " errore/i nella parola", "CONTINUA");
+                                testoInput = parolacorretta;
+                                control = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (parolacorretta == paesi[num])
                         {
-                            DisplayAlert("", "HAI VINTO!!!", "Cancella");
-                            testoInput = parolacorretta;
+                            if (testoInput!=parolacorretta)
+                                await DisplayAlert("", "QUELLO CHE HAI INSERITO NON E' CORRETTO RIPROVA!", "RIPROVA");   
                         }
                     }
                 }
-            }
 
+            }
         }
-        
-        if (paesi[num] == testoInput)
+        //Se si vince incrementa la var punteggio e cambia la sorgente dell'immagine
+        if (control == true)
         {
+            punteggio+=1;
+            Score.Text = punteggio.ToString();
             num = rnd.Next(1, 44);
             bandiera.Source = ImageSource.FromFile("b" + num + ".png");
         }
+        //Se si sbaglia decrementano le vite
         else
-        {
-            vite = Convert.ToInt32(Vite.Text);
-            Vite.Text = (vite--).ToString();
+        { 
+            vite--;
+            Vite.Text = (vite).ToString();
         }
+        // Quando finiscono le vite si apre il popup
+        if (vite == 0)
+        {
+            await Task.Delay(500);//Attesa di mezzo secondo prima che appaia il popUp
+            this.ShowPopup(new PopupPageIndovina());
+        }
+        //Testo ripristinato
         Input.Text = "";
     }
     private void LeftArrow_Clicked(object sender, EventArgs e)

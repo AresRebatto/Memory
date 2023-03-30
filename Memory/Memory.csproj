@@ -55,6 +55,9 @@
 	  <Compile Update="MultiPlayer.xaml.cs">
 	    <DependentUpon>MultiPlayer.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="PopupPageIndovina.xaml.cs">
+	    <DependentUpon>PopupPageIndovina.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -62,6 +65,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MultiPlayer.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PopupPageIndovina.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="PopupPage.xaml">
