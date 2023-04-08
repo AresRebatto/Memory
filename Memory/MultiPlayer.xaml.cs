@@ -1,103 +1,96 @@
+using CommunityToolkit.Maui.Views;
+using System.Collections.ObjectModel;
+
 namespace Memory;
 
 public partial class MuliPlayer : ContentPage
 {
-    private int[] vett = new int[3];
-    private int[] indexFlags = new int[6];
-    private int[,] matrix = new int[2, 3];
-    private int[,] matrixCheck = new int[2, 3];
-    private int[] valueRndRows = new int[6];
-    private int[] valueRndColumns = new int[6];
-    private int countInziale = 0, countFinale, countTimes = 0, count = 0, indexVett = 0, countForFlags = 0;
+    private int[] vett;
+    private int[] indexFlags;
+    private int[,] matrix;
+    private int countForFlags = 0, countForFinish = 0;
     private ImageButton buttonBefore;
-
-    private void Button_Clicked_1(object sender, EventArgs e)
-    {
-        if(FrstPlayer !=  null && ScndPlayer != null)
-        {
-
-        }
-    }
-
     private int appoggio;
-    private List<ImageButton> notEnabledButtons = new List<ImageButton>();
+    private ObservableCollection<ImageButton> notEnabledButtons = new ObservableCollection<ImageButton>();
+    private static readonly Random rnd = new Random();
+    string frstPlayer;
+    string scndPlayer;
 
     public MuliPlayer()
     {
         InitializeComponent();
-        countFinale = indexFlags.Length / 2;
-        Random rnd = new Random();
+    }
+
+    private void SceltaModalita_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        int count = 0;
+        // codice per gestire l'evento di selezione dell'item
+        if (SceltaModalita.SelectedIndex == 0)
+        {
+            //numero di Coppie
+            matrix = new int[2, 3];
+        }
+        else if (SceltaModalita.SelectedIndex == 1)
+        {
+            // codice da eseguire se l'item "Option 2" è selezionato
+            matrix = new int[4, 3];
+            for (count = 6; count < 12; count++)
+                ((ImageButton)myGrid.Children[count]).IsVisible = true;
+        }
+        else if (SceltaModalita.SelectedIndex == 2)
+        {
+            // codice da eseguire se l'item "Option 3" è selezionato
+            matrix = new int[6, 3];
+            for (count = 6; count < 18; count++)
+                ((ImageButton)myGrid.Children[count]).IsVisible = true;
+        }
+        vett = new int[(matrix.GetLength(0) * matrix.GetLength(1)) / 2];
+        indexFlags = new int[matrix.Length];
+        myGrid.IsVisible = true;
+        SceltaModalita.IsVisible = false;
+        Randomizzazione(vett, indexFlags, matrix, countForFlags);
+    }
+
+    private void Randomizzazione(int[] vett, int[] indexFlags, int[,] matrix, int countForFlags)
+    {
+        int count = 0, temp = 0;
         //Randomizzazione bandiere nelle posizioni del vettore
         for (int i = 0; i < vett.Length; i++)
         {
             do
             {
-                vett[i] = rnd.Next(1, 43);
-                for (int j = 0; j < i + 1; j++)
-                {
-                    if (j != i)
-                    {
-                        if (vett[j] == vett[i])
-                            count++;
-                    }
-                }
-            } while (count != 0);
+                temp = rnd.Next(1, 43);
+            } while (Array.IndexOf(vett, temp) != -1);
+            vett[i] = temp;
         }
-        foreach (var item in vett)
-            Console.Write(item + "\t");
         //Randomizzazione posizioni del vettore. //3 randomizzazioni per 2 volte => devono venire fuori 6 posizioni, 3 uguali
-        for (int giro = 0; giro < 2; giro++)
+        for (int i = 0; i < matrix.GetLength(0) * matrix.GetLength(1); i++)
         {
-            for (int parteVett = countInziale; parteVett < countFinale; parteVett++)
+            do
             {
-                do
-                {
-                    count = 0;
-                    indexVett = rnd.Next(0, vett.Length);
-                    indexFlags[countTimes] = rnd.Next(0, vett.Length);
-                    for (int j = countInziale; j < countTimes + 1; j++)
-                    {
-                        if (j != countTimes)
-                        {
-                            if (indexFlags[j] == indexFlags[countTimes])
-                                count++;
-                        }
-                    }
-                } while (count != 0);
-                countTimes++;
-            }
-            countInziale = (indexFlags.Length / 2);
-            countFinale = indexFlags.Length;
+                countForFlags = 0;
+                temp = rnd.Next(0, vett.Length);
+                /*
+                    Controllo che non si ripetano piu di due volte gli stessi valori
+                */
+                for (int j = 0; j < i; j++)
+                    if (indexFlags[j] == temp)
+                        countForFlags++;
+            } while (countForFlags >= 2);
+            indexFlags[i] = temp;
         }
-        /*
-            * Questa matrice conterrà le bandiere e le loro posizioni corrisponderanno alle posizioni dei buttons 
-         */
+
+        //* Questa matrice conterrà le bandiere e le loro posizioni corrisponderanno alle posizioni dei buttons 
+
         for (int i = 0; i < matrix.GetLength(0); i++)
         {
             for (int j = 0; j < matrix.GetLength(1); j++)
             {
-                matrix[i, j] = vett[indexFlags[countForFlags]];
-                countForFlags++;
+                matrix[i, j] = vett[indexFlags[count]];
+                count++;
             }
         }
         countForFlags = 0;//Ripristinarlo
-        SceltaModalita.SelectedItem = "Facile";
-        SceltaModalita.SelectedIndexChanged += (sender, args) =>
-        {
-            // codice per gestire l'evento di selezione dell'item
-            if (SceltaModalita.SelectedIndex == 0)
-            {
-                //numero diCoppie
-            }
-            else if (SceltaModalita.SelectedIndex == 1)
-            {
-                // codice da eseguire se l'item "Option 2" è selezionato
-            }
-            else if (SceltaModalita.SelectedIndex == 2)
-            {
-                // codice da eseguire se l'item "Option 3" è selezionato
-            }
-        };
     }
 
     private void LeftArrow_Clicked(object sender, EventArgs e)
@@ -105,35 +98,51 @@ public partial class MuliPlayer : ContentPage
         App.Current.MainPage = new MainPage();
     }
 
+    private void Button_Clicked_1(object sender, EventArgs e)
+    {
+        frstPlayer = Player1.Text;
+        scndPlayer = Player2.Text;
+        Player1.IsVisible = false;
+        Player2.IsVisible = false;
+        Start.IsVisible = false;
+    }
+
     private async void Button_Clicked(object sender, EventArgs e)
     {
+        int count = 0;
         //Button premuto    
         var button = (ImageButton)sender;
         //Prendo la riga e la colonna dei buttons per poi assegnarli la giusta bandiera che si trova all'interno della matrice già riempita (matrix)
         int row = Grid.GetRow(button);
         int column = Grid.GetColumn(button);
-        if (button.IsEnabled == true)
+        if (button.IsEnabled)
         {
             button.Source = ImageSource.FromFile("b" + Convert.ToString(matrix[row, column]) + ".png");
             if (countForFlags == 0) //Per disabilitare il primo button
                 button.IsEnabled = false;
-            if (countForFlags > 0 && countForFlags % 2 != 0) //dispari pk quando ho scelto il secondo button il contatore sarà dispari
+            else if (countForFlags % 2 != 0) //dispari pk quando ho scelto il secondo button il contatore sarà dispari
             {
                 if (matrix[row, column] == appoggio) //Se la bandiera del button di ora è uguale a quella del button di prima => li disabiliti
                 {
                     button.IsEnabled = false;
                     buttonBefore.IsEnabled = false;
+                    countForFinish++;
                 }
                 else //Se la bandiera di ora è diversa da quella di prima => entrambi i button allora ritorneranno anonimi
                 {
-                    foreach (ImageButton button2 in myGrid.Children)
+                    foreach (var child in myGrid.Children)
                     {
-                        if (button2.IsEnabled == true)
+                        if (child is ImageButton button2 && button2.IsEnabled)
                             notEnabledButtons.Add(button2);
-                        if (button.IsEnabled == button2.IsEnabled) // Utilizza l'operatore di confronto invece di assegnamento
-                            button2.IsEnabled = false;
                     }
-                    await Task.Delay(250); //Attesa prima che i buttons ritornano con la question
+                    foreach (var button2 in notEnabledButtons)
+                    {
+                        button2.IsEnabled = false;
+                        button2.Opacity = 1;
+                    }
+
+                    await Task.Delay(500); //Attesa prima che i buttons ritornano con la question
+
                     foreach (var button3 in notEnabledButtons)
                         button3.IsEnabled = true;
                     button.Source = ImageSource.FromFile("questionmark.png");
@@ -147,9 +156,32 @@ public partial class MuliPlayer : ContentPage
         appoggio = matrix[row, column]; //Appoggio assume la bandiera del button precedente 
         buttonBefore = button; //ButtonBefore assume le caratteristiche del button precedente
         button.Opacity = 1;
-        notEnabledButtons.Clear(); //Clear della lista
+        if (countForFinish == (matrix.GetLength(0) * matrix.GetLength(1)) / 2) //Le bandiere sono state trovate tutte
+        {
+            countForFinish = 0;
+            leftArrow.IsVisible = false;
+            await Task.Delay(1000);//=>Attesa di un secondo prima che appaia il popUp
+            leftArrow.IsVisible = true;
+            this.ShowPopup(new PopupPage());
+            //Ripristino tutto a prescindere che scegla di tornare alla home oppure di rimanere in single
+            foreach (ImageButton child in myGrid.Children)
+            {
+                child.IsEnabled = true;
+                child.Source = ImageSource.FromFile("questionmark.png");
+                //Rendere invisibili i buttons dal sesto in poi
+                if (count > 5)
+                    child.IsVisible = false;
+                count++; //Per capire a che punto mi trovo della grid
+            }
+            countForFlags = 0;
+            countForFinish = 0;
+            notEnabledButtons.Clear();
+            SceltaModalita.SelectedIndex = -1; //In questo modo posso riscegliere la stessa modalità quando RIGIOCO
+            myGrid.IsVisible = false;
+            SceltaModalita.IsVisible = true;
+        }
+        //Randomizzazione(rnd, vett, indexFlags, matrix, countForFlags);
     }
 
-    
 
 }
