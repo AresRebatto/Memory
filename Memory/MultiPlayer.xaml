@@ -52,13 +52,27 @@
             Margin="50, 0, 0, 0"
             Placeholder="Giocatore 1">
         </Entry>
-        <Entry 
+        <Label
+            x:Name="Error1"
+            Text="Si prega di inserire un valore valido"
+            TextColor="Red"
+            FontFamily="ComfortaaBold"
+            Margin="37, 0, 0, 0"
+            IsVisible="false"/>
+        <Entry
             x:Name="Player2"
             BackgroundColor="White" 
             WidthRequest="200"
             Margin="50, 20, 0, 0"
             Placeholder="Giocatore 2">
         </Entry>
+        <Label
+            x:Name="Error2"
+            Text="Si prega di inserire un valore valido"
+            TextColor="Red"
+            FontFamily="ComfortaaBold"
+            Margin="37, 0, 0, 0"
+            IsVisible="false"/>
         <Button
             x:Name="Start"
             Clicked="Button_Clicked_1"
@@ -90,7 +104,9 @@
                     x:Name="SceltaModalita" 
                     WidthRequest="200" 
                     HeightRequest="34"
-                    HorizontalTextAlignment="Center" >
+                    HorizontalTextAlignment="Center"
+                    BackgroundColor="White"
+                    IsVisible="false">
                 <Picker.ItemsSource TextColor="#440080">
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Facile</x:String>
@@ -104,6 +120,17 @@
             </Picker>
             <!--</Frame>-->
         </Grid>
+        <HorizontalStackLayout>
+            <Label 
+                x:Name="TextPlayer1"
+                TextColor="White"
+                FontFamily="ComfortaaBold"
+                Margin="100, 0, 0, 0"/>
+            <Label 
+                x:Name="TextPlayer2"
+                TextColor="White"
+                FontFamily="ComfortaaBold"/>
+        </HorizontalStackLayout>
         <Grid IsVisible="false" HorizontalOptions="Center" x:Name="myGrid">
             <!--Definzione righe-->
             <Grid.RowDefinitions>
@@ -123,6 +150,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
+            
             <!--Easy-->
             <ImageButton
                Style="{StaticResource ButtonFormattationEasy}"

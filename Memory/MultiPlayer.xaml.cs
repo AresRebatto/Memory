@@ -100,11 +100,26 @@ public partial class MuliPlayer : ContentPage
 
     private void Button_Clicked_1(object sender, EventArgs e)
     {
-        frstPlayer = Player1.Text;
-        scndPlayer = Player2.Text;
-        Player1.IsVisible = false;
-        Player2.IsVisible = false;
-        Start.IsVisible = false;
+        if(Player1.Text != null && Player2.Text != null)
+        {
+            frstPlayer = Player1.Text;
+            scndPlayer = Player2.Text;
+            Player1.IsVisible = false;
+            Player2.IsVisible = false;
+            Start.IsVisible = false;
+            SceltaModalita.IsVisible = true;
+            TextPlayer1.Text = Player1.Text;
+            TextPlayer2.Text = Player2.Text;
+        }
+        if(Player1.Text == null)
+            Error1.IsVisible = true;
+        else
+            Error1.IsVisible = false;
+        if (Player2.Text == null)
+            Error2.IsVisible = true;
+        else
+            Error2.IsVisible = false;
+
     }
 
     private async void Button_Clicked(object sender, EventArgs e)
@@ -182,6 +197,4 @@ public partial class MuliPlayer : ContentPage
         }
         //Randomizzazione(rnd, vett, indexFlags, matrix, countForFlags);
     }
-
-
 }

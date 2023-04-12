@@ -68,7 +68,8 @@
                     x:Name="SceltaModalita" 
                     WidthRequest="200" 
                     HeightRequest="34"
-                    HorizontalTextAlignment="Center" >
+                    HorizontalTextAlignment="Center"
+                    BackgroundColor="White">
                 <Picker.ItemsSource TextColor="#440080">
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Facile</x:String>
