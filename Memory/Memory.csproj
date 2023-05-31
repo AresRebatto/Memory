@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>Memory</ApplicationTitle>
+		<ApplicationTitle>FLAGICON</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.memory</ApplicationId>
@@ -45,6 +45,11 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\goal.png" />
+	  <None Remove="Resources\Images\hearth.png" />
 	</ItemGroup>
 
 	<ItemGroup>

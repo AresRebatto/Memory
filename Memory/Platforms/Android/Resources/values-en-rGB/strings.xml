@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<resources>
+	<string name="scegli">CHOOSE THE GAME MOD</string>
+	<string name="indovina">GUESS THE FLAG</string>
+	<string name="facile">Easy</string>
+	<string name="medio">Medium</string>
+	<string name="difficile">Hard</string>
+	<string name="annulla">Cancel</string>
+	<string name="primoGioc">Player 1</string>
+	<string name="secondoGioc">Player 2</string>
+	<string name="avvia">Start</string>
+	<string name="vite">Lives</string>
+	<string name="punti">Score</string>
+	<string name="scriviIlNome">Write the name of the state to which this flag belongs</string>
+	<string name="nome">Name</string>
+	<string name="invia">Send</string>
+</resources>
+

@@ -182,7 +182,7 @@ public partial class Indovina : ContentPage
         //Testo ripristinato
         Input.Text = "";
     }
-    private void LeftArrow_Clicked(object sender, EventArgs e)
+    private static void LeftArrow_Clicked(object sender, EventArgs e)
     {
         App.Current.MainPage = new MainPage();
     }

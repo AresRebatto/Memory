@@ -23,41 +23,40 @@
             Padding="30,0"
             VerticalOptions="Center">
         <Button
-            Grid.Row="0"
             ImageSource="leftarrow.png"
-            WidthRequest="30"
             BackgroundColor="Transparent"
             HorizontalOptions="Start"
             Clicked="LeftArrow_Clicked"
-            Margin="5, -250, 5, 5"
-            Padding="50"/>
+            Padding="15"/>
         <HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Start">
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Image
+                    Source="hearth.png"
+                    Margin="0,-32"/>
                 <Label
                     FontSize="12.5"
-                    Text="VITE: "
+                    Text=" X"
                     TextColor="White"
                     FontFamily="ComfortaaBold"/>
                 <Label
                     FontSize="12.5"
                     Text="3"
+                    
                     x:Name="Vite"
                     TextColor="White"
                     FontFamily="ComfortaaBold"/>
             </HorizontalStackLayout>
         </HorizontalStackLayout>
-        <HorizontalStackLayout HorizontalOptions="End">
-            <Label
-                FontSize="12.5"
-                Text="PUNTI: "
-                Margin="0,-45"
-                TextColor="White"
-                FontFamily="ComfortaaBold"/>
+        <HorizontalStackLayout HorizontalOptions="End" Margin="0,-50">
+            <Image
+                Source="goal.png"
+                WidthRequest="32"
+                />
             <Label
                 FontSize="12.5"
                 x:Name="Score"
                 Text="0"
-                Margin="0,-45"
+                Margin="10,0"
                 HorizontalTextAlignment="End"
                 TextColor="White"
                 FontFamily="ComfortaaBold"/>
@@ -66,7 +65,8 @@
         <Image
             x:Name="bandiera"
             HorizontalOptions="Center"
-            HeightRequest="200"/>
+            HeightRequest="200"
+            Margin="0,100"/>
 
         <Label
             Text="SCRIVI IL NOME DELLO STATO A CUI APPARTIENE QUESTA BANDIERA"

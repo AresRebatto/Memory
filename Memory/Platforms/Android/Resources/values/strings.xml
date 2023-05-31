@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<string name="scegli">SCEGLI LA MODALITÀ DI GIOCO</string>
+	<string name="indovina">iNDOVINA LA BANDIERA</string>
+	<string name="facile">Facile</string>
+	<string name="medio">Medio</string>
+	<string name="difficile">Difficile</string>
+	<string name="annulla">Annulla</string>
+	<string name="primoGioc">Giocatore 1</string>
+	<string name="secondoGioc">Giocatore 2</string>
+	<string name="avvia">Avvia</string>
+	<string name="vite">Vite</string>
+	<string name="punti">Punti</string>
+	<string name="scriviIlNome">Scrivi il nome dello stato a cui appartiene questa bandiera</string>
+	<string name="nome">Nome</string>
+	<string name="invia">Invia</string>
+</resources>
